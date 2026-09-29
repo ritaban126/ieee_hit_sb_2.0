@@ -1,0 +1,516 @@
+"use client";
+
+import { useState } from "react";
+import { Search, Rss } from "lucide-react";
+import Image from "next/image";
+import { Poppins } from "next/font/google";
+
+// FONT FIX: Poppins was only being loaded by the Hero's <style> on the home page,
+// so the Events page had no font. Loading it here makes this page self-contained.
+const poppins = Poppins({
+    subsets: ["latin"],
+    weight: ["300", "400", "500", "600", "700"],
+    display: "swap",
+});
+
+const filters = ["All", "Workshops", "Hackathons", "Talks", "Chapters", "Press"];
+
+const events = [
+    {
+        title: "CircuitHack 2026 closed with 300+ builders",
+        desc: "Teams shipped AI tools, IoT sensors, and full-stack apps across three tracks in 24 hours.",
+        author: "Hackathon recap",
+        date: "Aug 31, 2026",
+        image: "/events/2024_event1.jpg",
+        category: "Hackathons",
+        tag: "ramp",
+    },
+    {
+        title: "Styling the branch site for the future",
+        desc: "A long-running redesign that became an exercise in components, tokens, and clearer sections.",
+        author: "Kenneth Rao",
+        date: "Aug 26, 2026",
+        image: "/events/2024_event2.jpg",
+        category: "Press",
+    },
+    {
+        title: "Sharing our growth with every chapter",
+        desc: "As membership passes 500, we're giving every sub-committee more say in what we build next.",
+        author: "Karri Iqbal",
+        date: "Aug 26, 2026",
+        image: "/events/2025_event1.jpg",
+        category: "Chapters",
+    },
+    {
+        title: "18 hardware labs ran this year alone",
+        desc: "From PCB design to embedded C, hands-on sessions kept first-years building from week one.",
+        author: "Workshop recap",
+        date: "Aug 20, 2026",
+        image: "/events/2024_event2.jpg",
+        category: "Workshops",
+    },
+    {
+        title: "Alumni came back to talk shop",
+        desc: "Engineers from signal processing backgrounds shared real career paths with current members.",
+        author: "Tech Talks",
+        date: "Aug 14, 2026",
+        image: "/events/2025_event1.jpg",
+        category: "Talks",
+    },
+    {
+        title: "First research papers, submitted and reviewed",
+        desc: "Mentorship paired first-time authors with seniors, taking projects from draft to presentation.",
+        author: "Research",
+        date: "Aug 8, 2026",
+        image: "/events/2025_event2.jpg",
+        category: "Press",
+    },
+    {
+        title: "Robotics, WIE, and CS now share one calendar",
+        desc: "Cross-chapter events made it easier for members to discover labs outside their own track.",
+        author: "Chapters",
+        date: "Jul 30, 2026",
+        image: "/events/2025_event2.jpg",
+        category: "Chapters",
+    },
+    {
+        title: "300+ pull requests merged through GSSoC",
+        desc: "Members contributed to global open-source programs, learning Git workflows along the way.",
+        author: "Developer Track",
+        date: "Jul 22, 2026",
+        image: "/events/2025_event4.jpg",
+        category: "Workshops",
+    },
+    {
+        title: "Members earned 120 certificates this term",
+        desc: "Workshop attendance and project completion now sync automatically to member profiles.",
+        author: "Membership",
+        date: "Jul 15, 2026",
+        image: "/events/2026_event1.jpg",
+        category: "Workshops",
+    },
+    {
+        title: "The branch turns 9 years old",
+        desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
+        author: "Branch history",
+        date: "Jul 1, 2026",
+        image: "/events/2025_event4.jpg",
+        category: "Press",
+    },
+    {
+        title: "The branch turns 9 years old",
+        desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
+        author: "Branch history",
+        date: "Jul 1, 2026",
+        image: "/events/2026_event1.jpg",
+        category: "Press",
+    },
+    {
+        title: "The branch turns 9 years old",
+        desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
+        author: "Branch history",
+        date: "Jul 1, 2026",
+        image: "/events/2026_event2.jpg",
+        category: "Press",
+    },
+];
+
+const Events = () => {
+    const [active, setActive] = useState("All");
+    const [searchQuery, setSearchQuery] = useState("");
+
+    // Filter events based on the active category tab and search query input
+    const filteredEvents = events.filter((e) => {
+        const matchesCategory =
+            active === "All" ||
+            e.category?.toLowerCase() === active.toLowerCase() ||
+            e.author.toLowerCase().includes(active.toLowerCase());
+
+        const matchesSearch =
+            e.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            e.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            e.author.toLowerCase().includes(searchQuery.toLowerCase());
+
+        return matchesCategory && matchesSearch;
+    });
+
+    return (
+        <section className={`${poppins.className} relative w-full bg-black pt-20 pb-24 text-white antialiased`}>
+            {/* Container made wider and max-w expanded for larger side-by-side elements */}
+            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+
+                {/* ===== header ===== */}
+                <div className="mb-14">
+                    <p className="mb-4 flex items-center gap-2 text-xs font-medium tracking-[0.2em] text-zinc-500 uppercase">
+                        <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                        IEEE HIT SB · Newsroom
+                    </p>
+
+                    <h1 className="bg-linear-to-b from-white to-zinc-500 bg-clip-text pb-1 text-5xl font-semibold tracking-tight text-transparent md:text-7xl">
+                        Now
+                    </h1>
+                    <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-400 md:text-lg">
+                        Updates, recaps, and stories from our branch: workshops, hackathons, talks, and everything in between.
+                    </p>
+
+                    {/* filters + search */}
+                    <div className="mt-10 flex flex-col justify-between gap-5 border-b border-zinc-800 md:flex-row md:items-center">
+                        <div className="flex flex-wrap gap-x-7 gap-y-2 text-sm">
+                            {filters.map((f) => (
+                                <button
+                                    key={f}
+                                    onClick={() => setActive(f)}
+                                    className={`relative pb-4 tracking-tight transition-colors ${
+                                        active === f ? "font-medium text-white" : "text-zinc-500 hover:text-zinc-300"
+                                    }`}
+                                >
+                                    {f}
+                                    {active === f && (
+                                        <span className="absolute inset-x-0 -bottom-px h-px bg-white" />
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+
+                        <div className="flex items-center gap-3 pb-4">
+                            <div className="flex w-full items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-2 transition-colors focus-within:border-zinc-600 md:w-64">
+                                <Search className="h-4 w-4 text-zinc-500" />
+                                <input
+                                    type="text"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    placeholder="Search..."
+                                    className="w-full bg-transparent text-sm text-white outline-none placeholder:text-zinc-500"
+                                />
+                            </div>
+                            <button className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-800 text-zinc-500 transition-colors hover:border-zinc-600 hover:text-white">
+                                <Rss className="h-4 w-4" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* ===== grid with card-to-card divider borders ===== */}
+                {filteredEvents.length > 0 ? (
+                    <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+                        {filteredEvents.map((e, i) => (
+                            <article
+                                key={i}
+                                className={`group flex cursor-pointer flex-col ${
+                                    i % 3 !== 2 ? "lg:border-r lg:border-zinc-800/80 lg:pr-8" : ""
+                                }`}
+                            >
+                                <div className="relative mb-5 aspect-4/3 w-full overflow-hidden rounded-xl border border-zinc-800 bg-[#0e1013] transition-colors duration-300 group-hover:border-zinc-600">
+                                    <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                                        {e.image && (
+                                            <>
+                                                <Image
+                                                    src={e.image}
+                                                    alt={e.title}
+                                                    fill
+                                                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                                                    className="object-cover"
+                                                />
+                                                {e.tag && (
+                                                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                                        <span className="text-3xl font-semibold tracking-tight text-white">{e.tag}</span>
+                                                    </div>
+                                                )}
+                                            </>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <h3 className="mb-2 text-xl leading-snug font-semibold tracking-tight text-zinc-50 transition-colors group-hover:text-white">
+                                    {e.title}
+                                    <span className="ml-1.5 inline-block text-zinc-500 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100">
+                                        ↗
+                                    </span>
+                                </h3>
+                                <p className="mb-4 line-clamp-3 text-[15px] leading-relaxed text-zinc-400">{e.desc}</p>
+                                <p className="mt-auto flex items-center gap-2 text-xs text-zinc-500">
+                                    <span className="font-medium text-zinc-300">{e.author}</span>
+                                    <span className="h-0.75 w-0.75 rounded-full bg-zinc-600" />
+                                    <span>{e.date}</span>
+                                </p>
+                            </article>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="py-20 text-center text-zinc-500">
+                        <p className="text-lg">No events found matching &ldquo;{searchQuery}&rdquo;</p>
+                    </div>
+                )}
+
+            </div>
+        </section>
+    );
+};
+
+export default Events;
+
+
+
+
+
+// "use client";
+
+// import React, { useState } from "react";
+// import { Search, ArrowUpRight, Rss } from "lucide-react";
+
+// interface EventItem {
+//     id: number;
+//     category: string;
+//     title: string;
+//     description: string;
+//     authorOrType: string;
+//     date: string;
+//     imageType: "image" | "code" | "chart" | "badge";
+// }
+
+// const allEvents: EventItem[] = [
+//     {
+//         id: 1,
+//         category: "Workshops",
+//         title: "The coding agent behind 75% of HIT's automated PRs",
+//         description: "Why and how our dev team built an internal AI coding agent that's now responsible for reviewing three of every four PRs submitted across student repositories.",
+//         authorOrType: "Customer story",
+//         date: "Aug 31, 2026",
+//         imageType: "image",
+//     },
+//     {
+//         id: 2,
+//         category: "Tech Talks",
+//         title: "Styling Linear UI for the future with custom Tailwind setups",
+//         description: "A long-running migration that became an exercise in tooling, automation, and designing clearer boundaries for both human developers and agents.",
+//         authorOrType: "Kenneth Skovhus",
+//         date: "Aug 26, 2026",
+//         imageType: "code",
+//     },
+//     {
+//         id: 3,
+//         category: "Hackathons",
+//         title: "Sharing IEEE HIT SB's growth with the people building it",
+//         description: "As our chapter passes 100+ active contributors in open-source, we're giving our core team another opportunity to participate in the upside.",
+//         authorOrType: "Karri Saarinen",
+//         date: "Aug 26, 2026",
+//         imageType: "chart",
+//     },
+//     {
+//         id: 4,
+//         category: "Workshops",
+//         title: "Building scalable microservices with Node.js & Docker containers",
+//         description: "An intensive weekend session breaking down containerization, multi-stage Docker builds, and zero-downtime deployments on VPS.",
+//         authorOrType: "Technical Team",
+//         date: "Aug 20, 2026",
+//         imageType: "code",
+//     },
+//     {
+//         id: 5,
+//         category: "Community",
+//         title: "Code Friday #42: Idempotency Keys and Distributed Systems",
+//         description: "Deep-dive educational carousel and live walkthrough covering safety guarantees in financial and event-driven backend architectures.",
+//         authorOrType: "IEEE HIT SB",
+//         date: "Aug 15, 2026",
+//         imageType: "badge",
+//     },
+//     {
+//         id: 6,
+//         category: "Hackathons",
+//         title: "CircuitHack 2026: 24-Hour Hardware & Embedded Hackathon",
+//         description: "From registration to live judging dashboards — exploring how our student branch builds proprietary tools to manage thousands of hackers.",
+//         authorOrType: "Organizing Committee",
+//         date: "Aug 10, 2026",
+//         imageType: "image",
+//     },
+//     {
+//         id: 7,
+//         category: "Tech Talks",
+//         title: "Next.js App Router patterns for high-performance dashboards",
+//         description: "Optimizing server components, caching layers, and database queries using Neon DB and Drizzle ORM for lightning-fast loads.",
+//         authorOrType: "Guest Speaker",
+//         date: "Aug 02, 2026",
+//         imageType: "code",
+//     },
+//     {
+//         id: 8,
+//         category: "Community",
+//         title: "GirlScript Summer of Code 2026: Contribution Guidelines",
+//         description: "Standardizing environment configurations, UI filters, and pull request workflows for open-source newcomers joining our repositories.",
+//         authorOrType: "Open Source Lead",
+//         date: "Jul 28, 2026",
+//         imageType: "badge",
+//     },
+//     {
+//         id: 9,
+//         category: "Workshops",
+//         title: "Introduction to PCB Design & Altium Fundamentals",
+//         description: "Hands-on session for first-years covering schematic capture, component footprints, and multilayer routing for custom microcontrollers.",
+//         authorOrType: "Robotics Chapter",
+//         date: "Jul 20, 2026",
+//         imageType: "chart",
+//     },
+//     {
+//         id: 10,
+//         category: "Tech Talks",
+//         title: "Real-time communication using WebSockets and the PERN stack",
+//         description: "Architecture breakdown of our real-time messaging clone, focusing on low-latency state synchronization and connection resilience.",
+//         authorOrType: "Full Stack Guild",
+//         date: "Jul 12, 2026",
+//         imageType: "code",
+//     },
+// ];
+
+// const Events = () => {
+//     const [selectedTab, setSelectedTab] = useState("All");
+//     const [searchQuery, setSearchQuery] = useState("");
+
+//     const tabs = ["All", "Workshops", "Hackathons", "Tech Talks", "Community"];
+
+//     // Filter items based on tab and search query
+//     const filteredEvents = allEvents.filter((item) => {
+//         const matchesTab = selectedTab === "All" || item.category === selectedTab;
+//         const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+//                               item.description.toLowerCase().includes(searchQuery.toLowerCase());
+//         return matchesTab && matchesSearch;
+//     });
+
+//     return (
+//         <section className="w-full bg-black text-white min-h-screen px-6 md:px-16 lg:px-24 py-12">
+            
+//             {/* Header Title */}
+//             <div className="mb-10">
+//                 <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-white mb-8">
+//                     Now
+//                 </h1>
+
+//                 {/* Filter Navigation & Search Bar Row */}
+//                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-zinc-900 pb-5">
+                    
+//                     {/* Category Tabs */}
+//                     <div className="flex items-center gap-6 overflow-x-auto no-scrollbar text-sm font-medium">
+//                         {tabs.map((tab) => (
+//                             <button
+//                                 key={tab}
+//                                 onClick={() => setSelectedTab(tab)}
+//                                 className={`transition-colors whitespace-nowrap pb-1 ${
+//                                     selectedTab === tab
+//                                         ? "text-white border-b-2 border-white"
+//                                         : "text-zinc-500 hover:text-zinc-300"
+//                                 }`}
+//                             >
+//                                 {tab}
+//                             </button>
+//                         ))}
+//                     </div>
+
+//                     {/* Search Input & RSS Icon */}
+//                     <div className="flex items-center gap-4">
+//                         <div className="relative w-full md:w-64">
+//                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+//                             <input
+//                                 type="text"
+//                                 placeholder="Search..."
+//                                 value={searchQuery}
+//                                 onChange={(e) => setSearchQuery(e.target.value)}
+//                                 className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-700 transition-colors"
+//                             />
+//                         </div>
+//                         <button className="p-2 bg-zinc-950 border border-zinc-800 rounded-lg text-zinc-400 hover:text-white transition-colors shrink-0">
+//                             <Rss className="w-4 h-4" />
+//                         </button>
+//                     </div>
+
+//                 </div>
+//             </div>
+
+//             {/* Events Grid (3 columns layout matching Linear design) */}
+//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+//                 {filteredEvents.map((item) => (
+//                     <div 
+//                         key={item.id} 
+//                         className="group flex flex-col justify-between cursor-pointer"
+//                     >
+//                         <div>
+//                             {/* Card Visual Thumbnail Box */}
+//                             <div className="w-full h-52 bg-[#0e1013] border border-zinc-800/80 rounded-xl overflow-hidden relative mb-5 flex items-center justify-center transition-all duration-300 group-hover:border-zinc-700">
+                                
+//                                 {/* Dynamic Card Graphic Placeholders */}
+//                                 {item.imageType === "image" && (
+//                                     <div className="absolute inset-0 bg-linear-to-br from-zinc-900 to-black flex items-center justify-center p-6">
+//                                         <div className="w-full h-full bg-zinc-800/40 rounded-lg flex items-center justify-center text-zinc-500 text-xs font-mono uppercase tracking-widest border border-zinc-700/50">
+//                                             [ Branch Media ]
+//                                         </div>
+//                                     </div>
+//                                 )}
+
+//                                 {item.imageType === "code" && (
+//                                     <div className="w-full h-full p-5 font-mono text-[11px] text-zinc-500 bg-[#090a0c] flex flex-col justify-center leading-relaxed select-none">
+//                                         <p className="text-zinc-400"> {item.category} snippet</p>
+//                                         <p className="text-red-400/85">import &#123; createClient &#125; from &apos;@hit/core&apos;</p>
+//                                         <p className="text-zinc-600">async function init() &#123;</p>
+//                                         <p className="text-zinc-500 pl-4">await branch.deploy();</p>
+//                                         <p className="text-zinc-600">&#125;</p>
+//                                     </div>
+//                                 )}
+
+//                                 {item.imageType === "chart" && (
+//                                     <div className="w-full h-full relative overflow-hidden flex items-center justify-center bg-[#08090b]">
+//                                         <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#27272a_1px,transparent_1px),linear-gradient(to_bottom,#27272a_1px,transparent_1px)] bg-size-[16px_16px]"></div>
+//                                         <div className="w-3/4 h-1/2 border-l border-b border-zinc-700 relative flex items-end">
+//                                             <div className="w-full h-[65%] bg-linear-to-t from-red-950/40 to-transparent border-t border-red-500/40"></div>
+//                                         </div>
+//                                     </div>
+//                                 )}
+
+//                                 {item.imageType === "badge" && (
+//                                     <div className="w-full h-full bg-[#0a0b0d] flex items-center justify-center gap-2 p-6">
+//                                         <div className="w-10 h-10 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-white font-bold text-sm">
+//                                             HIT
+//                                         </div>
+//                                         <div className="h-px w-12 bg-zinc-800"></div>
+//                                         <div className="w-10 h-10 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-red-400 font-bold text-sm">
+//                                             SB
+//                                         </div>
+//                                     </div>
+//                                 )}
+
+//                                 {/* Hover external link icon */}
+//                                 <div className="absolute top-3 right-3 w-7 h-7 rounded-lg bg-black/60 border border-zinc-800/80 flex items-center justify-center text-zinc-400 opacity-0 group-hover:opacity-100 transition-opacity">
+//                                     <ArrowUpRight className="w-3.5 h-3.5" />
+//                                 </div>
+//                             </div>
+
+//                             {/* Card Title */}
+//                             <h3 className="text-base font-medium text-zinc-100 group-hover:text-white leading-snug mb-2 transition-colors">
+//                                 {item.title}
+//                             </h3>
+
+//                             {/* Card Description */}
+//                             <p className="text-xs text-zinc-400 leading-relaxed line-clamp-2">
+//                                 {item.description}
+//                             </p>
+//                         </div>
+
+//                         {/* Card Footer Metadata */}
+//                         <div className="flex items-center gap-2 text-xs text-zinc-500 pt-5">
+//                             <span>{item.authorOrType}</span>
+//                             <span>•</span>
+//                             <span>{item.date}</span>
+//                         </div>
+
+//                     </div>
+//                 ))}
+//             </div>
+
+//             {filteredEvents.length === 0 && (
+//                 <div className="py-20 text-center text-zinc-500 text-sm">
+//                     No updates found matching your search.
+//                 </div>
+//             )}
+
+//         </section>
+//     );
+// };
+
+// export default Events;
