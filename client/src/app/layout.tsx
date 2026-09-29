@@ -144,6 +144,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SplashScreen from "@/components/SplashScreen";
+import Banner from "@/components/sections/Banner";
 
 export const metadata: Metadata = {
   title: "IEEE HIT SB",
@@ -158,6 +159,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
+        <Banner />
         <SplashScreen />
         {children}
       </body>

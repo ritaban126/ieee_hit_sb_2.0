@@ -1,9 +1,15 @@
-
 "use client";
 
 import React from "react";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 interface BannerProps {
   badgeText?: string;
@@ -17,6 +23,7 @@ interface BannerProps {
 const scanlinePattern =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.03' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E";
 
+  
 export default function AnnouncementBanner({
   badgeText = "Live Event",
   title = "CircuitHack 2026: 24-Hour Hackathon Registrations are Now Open",
@@ -28,7 +35,8 @@ export default function AnnouncementBanner({
   return (
     <aside
       aria-label="Announcement"
-      className="
+      className={`
+        ${poppins.className}
         sticky top-0 z-100
         w-full
         bg-neutral-950
@@ -36,7 +44,7 @@ export default function AnnouncementBanner({
         text-neutral-100
         overflow-hidden
         shadow-lg shadow-black/20
-      "
+      `}
     >
       {/* Scanline Texture */}
       <div
@@ -54,10 +62,8 @@ export default function AnnouncementBanner({
       <div className="absolute left-1/2 top-0 -translate-x-1/2 w-32 h-8 bg-linear-to-r from-cyan-500/10 via-fuchsia-500/20 to-yellow-500/10 blur-xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
-        
         {/* Left Content */}
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center md:text-left">
-          
           {/* Update Badge */}
           <span
             className="
@@ -65,12 +71,11 @@ export default function AnnouncementBanner({
               bg-neutral-900
               border border-neutral-700
               px-3 py-1
-              text-xs font-mono
+              text-xs font-medium
               uppercase tracking-wider
               text-neutral-300
             "
           >
-            {/* Colorful Update Star */}
             <Star
               className="
                 w-3.5 h-3.5
@@ -92,7 +97,6 @@ export default function AnnouncementBanner({
 
         {/* Actions */}
         <div className="flex items-center gap-4 shrink-0">
-          
           {/* Primary CTA */}
           <Link
             href={ctaLink}
