@@ -572,10 +572,10 @@ const Events = () => {
                 </div>
 
                 <div className="space-y-0 border-t border-zinc-800">
-                    <div className="py-6">
+                    {/* <div className="py-6">
                         <h3 className="text-2xl font-semibold tracking-tight">Featured Tracks & Initiatives</h3>
                         <p className="text-zinc-400 text-sm mt-1">Click any section to dive into structured details and metrics.</p>
-                    </div>
+                    </div> */}
 
                     {eventsData.map((event, index) => {
                         const isOpen = openIndex === index;

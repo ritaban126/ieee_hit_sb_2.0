@@ -846,16 +846,12 @@ import type {
 import SectionWrapper from "../ui/SectionWrapper";
 
 type Achievement = {
-    event: string;
+    id: number;
     title: string;
-    quote: string;
-    name: string;
-    role: string;
-    year: string;
-    result: string;
     desc?: string;
     image?: string;
     href?: string;
+    year: string;
 };
 
 const READ_MORE_URL = "https://edu.ieee.org/in-hit/";
@@ -865,100 +861,58 @@ const AUTO_SPEED = 25;
 
 const achievements: Achievement[] = [
     {
-        event: "CircuitHack",
-        title: "Team Volt wins the 24-hour CircuitHack with a self-balancing robot",
-        quote:
-            "We had 24 hours, one bench and almost no sleep. Watching the robot balance on stage made every hour worth it.",
-        name: "Aarav Mehta",
-        role: "Team Lead, Team Volt",
+        id: 1,
+        title: "IEEE HIT SB performed best among all the branches.",
+        desc: "IEEE HIT SB performed best among all branches under Kharagpur Section.",
         year: "2025",
-        result: "1st Place",
-        desc:
-            "Out of 60+ teams, Team Volt built and demoed a self-balancing robot in 24 hours and took home the top prize.",
         image: "/events/2026_event1.jpg",
         href: READ_MORE_URL,
     },
     {
-        event: "IEEE Conference",
+        id: 2,
         title: "Low-power IoT research paper presented at an IEEE conference",
-        quote:
-            "Our first paper felt impossible until our seniors walked us through every single review round.",
-        name: "Riya Sharma",
-        role: "Research Lead",
+        desc: "Our members presented their first research paper on low-power IoT sensing, mentored by senior students and faculty.",
         year: "2025",
-        result: "Paper Presented",
-        desc:
-            "Our members presented their first research paper on low-power IoT sensing, mentored by senior students and faculty.",
         image: "/events/2026_event2.jpg",
         href: READ_MORE_URL,
     },
     {
-        event: "Branch Award",
+        id: 3,
         title: "Our student branch is recognised for outstanding activity",
-        quote:
-            "Every event and every late-night lab session added up. This award belongs to the whole branch.",
-        name: "Dr. Anil Rao",
-        role: "Branch Counsellor",
+        desc: "The branch was recognised for consistent events, member growth, and technical output across the year.",
         year: "2024",
-        result: "Best Branch",
-        desc:
-            "The branch was recognised for consistent events, member growth, and technical output across the year.",
         image: "/spotlight/spotlight_1.png",
         href: READ_MORE_URL,
     },
     {
-        event: "PCB Workshop",
+        id: 4,
         title: "200+ students join our hands-on PCB design workshop",
-        quote:
-            "I had never held a soldering iron before. By the end of the day I had a working board on my desk.",
-        name: "Kabir Das",
-        role: "First-year member",
+        desc: "A two-day, hands-on workshop that took first-years from schematic to a fabricated board.",
         year: "2025",
-        result: "200+ Participants",
-        desc:
-            "A two-day, hands-on workshop that took first-years from schematic to a fabricated board.",
         image: "/spotlight/spotlight_2.jpg",
         href: READ_MORE_URL,
     },
     {
-        event: "IEEE Global",
+        id: 5,
         title: "Our chapter joins the IEEE global student network",
-        quote:
-            "Being part of the global network opened doors to labs and mentors we never had access to.",
-        name: "Neha Iyer",
-        role: "Branch Chairperson",
+        desc: "Our branch is now part of the worldwide IEEE student network, sharing resources, labs, and events.",
         year: "2024",
-        result: "Connected",
-        desc:
-            "Our branch is now part of the worldwide IEEE student network, sharing resources, labs, and events.",
         image: "/events/2026_event3.jpg",
         href: READ_MORE_URL,
     },
     {
-        event: "SwarmBot",
+        id: 6,
         title: "SwarmBot takes the Best Hardware Project award",
-        quote:
-            "Ten small robots talking to each other and moving as one. That was the moment it all clicked.",
-        name: "Vikram Nair",
-        role: "Hardware Lead",
+        desc: "A swarm of small robots coordinating over a mesh network, built entirely by student members.",
         year: "2025",
-        result: "Best Hardware",
-        desc:
-            "A swarm of small robots coordinating over a mesh network, built entirely by student members.",
         image: "/events/2026_event4.jpg",
         href: READ_MORE_URL,
     },
     {
-        event: "Robo Finals",
+        id: 7,
         title: "Two members selected for the national robotics finals",
-        quote:
-            "Making the national finals taught us more than any classroom ever could.",
-        name: "Sara Khan",
-        role: "Robotics Team",
+        desc: "Two members made it through the national qualifiers and finished in the top ten at the finals.",
         year: "2024",
-        result: "Top 10",
-        desc:
-            "Two members made it through the national qualifiers and finished in the top ten at the finals.",
         image: "/events/2025_event4.jpg",
         href: READ_MORE_URL,
     },
@@ -1030,7 +984,7 @@ const Card = ({ a, index, set, onExpand }: CardProps) => {
     return (
         <div
             data-card
-            data-event={a.event}
+            data-id={a.id}
             data-set={set}
             aria-hidden={clone || undefined}
             className="ach-rv ach-card group relative w-72 shrink-0 sm:w-80 lg:w-88 xl:w-96"
@@ -1055,9 +1009,11 @@ const Card = ({ a, index, set, onExpand }: CardProps) => {
 
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
 
-                    <p className="absolute bottom-6 left-6 text-3xl font-semibold tracking-tight text-white">
-                        {a.event}
-                    </p>
+                    <div className="absolute inset-x-6 bottom-6">
+                        <p className="text-xs font-medium tracking-[0.14em] text-cyan-300 uppercase">
+                            Achievement
+                        </p>
+                    </div>
 
                     {/* hover blocks (blue) */}
 
@@ -1074,20 +1030,16 @@ const Card = ({ a, index, set, onExpand }: CardProps) => {
                         ))}
                     </div>
 
-                    {/* quote */}
+                    {/* hover text: description + year */}
 
                     <div className="ach-quote pointer-events-none absolute inset-0 z-30 flex flex-col justify-between p-7 text-white">
                         <p className="line-clamp-8 text-[19px] leading-snug">
-                            &ldquo;{a.quote}&rdquo;
+                            {a.desc ?? a.title}
                         </p>
 
-                        <div>
-                            <p className="text-[15px] font-medium">{a.name}</p>
-
-                            <p className="mt-1 font-mono text-xs tracking-wider text-blue-200 uppercase">
-                                {a.role}
-                            </p>
-                        </div>
+                        <p className="font-mono text-xs tracking-wider text-blue-200 uppercase">
+                            Achievement · {a.year}
+                        </p>
                     </div>
 
                     {/* blue line on the bottom edge of the card */}
@@ -1098,11 +1050,14 @@ const Card = ({ a, index, set, onExpand }: CardProps) => {
                     />
                 </div>
 
+                {/* ---- title below the card ---- */}
+
                 <div className="pt-6">
                     <h3 className="text-[17px] leading-snug text-white">
                         {a.title}
                     </h3>
                 </div>
+
             </Link>
 
             {/* expand button */}
@@ -1111,7 +1066,7 @@ const Card = ({ a, index, set, onExpand }: CardProps) => {
                 type="button"
                 onClick={() => onExpand(a)}
                 tabIndex={clone ? -1 : undefined}
-                aria-label={`Expand ${a.event}`}
+                aria-label={`Expand ${a.title}`}
                 className="absolute top-4 right-4 z-40 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-black/70 text-white transition-colors hover:bg-white hover:text-black"
             >
                 <Maximize2 className="h-3.5 w-3.5" />
@@ -1323,7 +1278,7 @@ const Spotlight = () => {
         trackRef.current
             ?.querySelectorAll<HTMLElement>("[data-card]")
             .forEach((el) => {
-                if (mark && el.dataset.event === mark) {
+                if (mark && el.dataset.id === mark) {
                     el.dataset.visited = "1";
                 } else {
                     delete el.dataset.visited;
@@ -1349,7 +1304,7 @@ const Spotlight = () => {
             ? null
             : t.closest<HTMLElement>("[data-card]");
 
-        trackHover(hoveredCard?.dataset.event ?? null);
+        trackHover(hoveredCard?.dataset.id ?? null);
 
         const overCard =
             !!t.closest("[data-card]") &&
@@ -1683,7 +1638,7 @@ const Spotlight = () => {
                             >
                                 {achievements.map((a, i) => (
                                     <Card
-                                        key={`a-${a.event}`}
+                                        key={`a-${a.id}`}
                                         a={a}
                                         index={i}
                                         set="a"
@@ -1694,7 +1649,7 @@ const Spotlight = () => {
                                 {/* clone set → makes the auto-scroll loop seamless */}
                                 {achievements.map((a, i) => (
                                     <Card
-                                        key={`b-${a.event}`}
+                                        key={`b-${a.id}`}
                                         a={a}
                                         index={i}
                                         set="b"
@@ -1726,10 +1681,10 @@ const Spotlight = () => {
 
             {selected && (
                 <div
-                    className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+                    className="fixed inset-0 z-200 flex items-center justify-center p-4 md:p-8"
                     role="dialog"
                     aria-modal="true"
-                    aria-label={selected.event}
+                    aria-label={selected.title}
                 >
                     <div
                         className="ach-modal-bg absolute inset-0 bg-black/80 backdrop-blur-sm"
@@ -1739,46 +1694,26 @@ const Spotlight = () => {
                     <div className="ach-modal-card relative z-10 grid max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl border border-zinc-800 bg-[#0a0a0a] md:grid-cols-2">
                         {/* visual side */}
 
-                        <div className="relative h-72 overflow-hidden bg-black md:h-auto md:min-h-130">
+                        <div className="relative h-72 overflow-hidden bg-black md:h-auto md:min-h-110">
                             <CardVisual a={selected} />
-
-                            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-black via-black/70 to-transparent" />
-
-                            <p className="absolute right-6 bottom-6 left-6 text-3xl font-semibold tracking-tight text-white">
-                                {selected.event}
-                            </p>
                         </div>
 
-                        {/* details side */}
+                        {/* details side (short: label, title, description, button) */}
 
                         <div className="flex flex-col justify-between gap-8 p-7 md:p-10">
                             <div>
-                                <p className="text-xs tracking-widest text-zinc-500">
-                                    {selected.year} · {selected.result}
+                                <p className="text-xs font-medium tracking-[0.14em] text-cyan-300 uppercase">
+                                    Achievement · {selected.year}
                                 </p>
 
-                                <h3 className="mt-3 text-2xl leading-snug font-semibold text-white">
+                                <h3 className="mt-4 text-2xl leading-snug font-semibold text-white md:text-3xl">
                                     {selected.title}
                                 </h3>
 
-                                <p className="mt-4 text-sm leading-relaxed text-zinc-400">
+                                <p className="mt-4 text-sm leading-relaxed text-zinc-400 md:text-base">
                                     {selected.desc ??
                                         "More details about this achievement will be added soon."}
                                 </p>
-
-                                <div className="mt-6 rounded-xl border border-zinc-800 bg-[#1a1a1a] p-5">
-                                    <p className="text-[15px] leading-snug text-zinc-200">
-                                        &ldquo;{selected.quote}&rdquo;
-                                    </p>
-
-                                    <p className="mt-4 text-sm font-medium text-white">
-                                        {selected.name}
-                                    </p>
-
-                                    <p className="mt-1 font-mono text-xs tracking-wider text-zinc-500 uppercase">
-                                        {selected.role}
-                                    </p>
-                                </div>
                             </div>
 
                             <Link

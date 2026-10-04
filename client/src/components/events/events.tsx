@@ -1,9 +1,8 @@
 "use client";
 
-
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties, ReactNode } from "react";
-import { Search, Rss } from "lucide-react";
+import { Search, Rss, Calendar, MapPin } from "lucide-react";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
 import EventModal from "@/components/events/EventModal";
@@ -16,151 +15,272 @@ const poppins = Poppins({
 
 const filters = ["All", "Workshops", "Hackathons", "Talks", "Chapters", "Press"];
 
+const READ_MORE_URL = "https://edu.ieee.org/in-hit/";
+
 const events = [
     {
         id: 1,
-        title: "CircuitHack 2026 closed with 300+ builders",
+        title: "Aero-Botix 1.O",
         desc: "Teams shipped AI tools, IoT sensors, and full-stack apps across three tracks in 24 hours.",
-        fullDesc: "HIT SB successfully hosted CircuitHack 2026, an immersive three-day hackathon that brought the excitement of competitive coding and hardware building to HIT. Participants explored the fascinating world of rapid prototyping through a perfect blend of software engineering, IoT sensors, and collaborative development. The event gave students the unique opportunity to design, assemble, and pitch their own working prototypes, combining technical innovation with teamwork under strict time limits.",
         author: "Hackathon recap",
-        date: "Aug 31, 2026",
-        image: "/events/2024_event1.jpg",
+        date: "13th–15th September 2025",
+        image: "/events/aerobotix_event1.png",
         category: "Hackathons",
         tag: "ramp",
-        mode: "Offline",
-        location: "Main Auditorium, Haldia Institute of Technology",
+        eventType: "Technical",
+        eventDate: "31st August 2026",
+        eventLocation: " Room 6102 , Electrical Department, Haldia Institute of Technology",
+        description: [
+            "HIT SB successfully hosted CircuitHack 2026, an immersive three-day hackathon that brought the excitement of competitive coding and hardware building to HIT. Participants explored the fascinating world of rapid prototyping through a perfect blend of software engineering, IoT sensors, and collaborative development.",
+            "The event gave students the unique opportunity to design, assemble, and pitch their own working prototypes, combining technical innovation with teamwork under strict time limits.",
+        ],
+        images: ["/events/2024_event1.jpg", "/events/2024_event2.jpg", "/events/2025_event1.jpg"],
+        knowMoreLink: READ_MORE_URL,
     },
     {
         id: 2,
-        title: "Styling the branch site for the future",
+        title: "Pscpice",
         desc: "A long-running redesign that became an exercise in components, tokens, and clearer sections.",
-        fullDesc: "A long-running redesign that became an exercise in components, design tokens, and clearer grid layouts. Contributors restructured the entire frontend architecture using Next.js and Tailwind CSS to ensure lightning-fast performance and seamless responsiveness across all screen sizes.",
         author: "Kenneth Rao",
-        date: "Aug 26, 2026",
-        image: "/events/2024_event2.jpg",
+        date: "8th–9th August 2025",
+        image: "/events/pspice_event2.png",
         category: "Press",
-        mode: "Online / Hybrid",
-        location: "Developer Track HQ",
+        eventType: "Technical Workshop",
+        eventDate: "26th August 2026",
+        eventLocation: "Offline (Haldia Institute of Technology)",
+        description: [
+            "IEEE HIT SB successfully conducted a two-day immersive PSpice Workshop on 8th and 9th August 2025, designed to help participants transform their circuit ideas into real-world simulations using Cadence’s powerful PSpice tool. From beginners to advanced learners, attendees gained hands-on experience in both analog and digital circuit simulation, mastering the fundamentals while exploring advanced techniques for real-world applications",
+            "The workshop kicked off with an engaging blend of theory, simulation, and problem-solving, covering topics such as libraries, notations, circuit analysis, graph plotting, source configurations, and Thevenin’s theorem. As participants progressed, they explored advanced concepts including DC sources, damping, command functions, Op-Amp subcircuits, MOSFET modeling, and efficient component placement, turning classroom knowledge into functional and optimized circuits",
+            "Led by Asst. Prof. Piya Roy, Asst. Prof. Alpana Barman, and guided by faculty mentors Assoc. Prof. Sandip Kumar Ojha, Assoc. Prof. Pratyay Konar, Asst. Prof. Saubhik Maulik, and Asst. Prof. Goutam Das, the sessions were interactive, insightful, and highly practical. The workshop concluded with a certificate distribution ceremony, celebrating the dedication, creativity, and technical growth of all participants, leaving them inspired to innovate and simulate with confidence.",
+        ],
+        images: ["/events/2024_event2.jpg", "/events/2025_event2.jpg"],
+        knowMoreLink: READ_MORE_URL,
     },
     {
         id: 3,
-        title: "Sharing our growth with every chapter",
+        title: "Virtual Talk Session on Edge Device Development &Their Advantages",
         desc: "As membership passes 500, we're giving every sub-committee more say in what we build next.",
-        fullDesc: "As membership passes 500 active student developers, we're empowering every sub-committee with more autonomy and direct say in what tools and workshops we build next for the campus community.",
         author: "Karri Iqbal",
-        date: "Aug 26, 2026",
-        image: "/events/2025_event1.jpg",
+        date: "26th July 2025",
+        image: "/events/vitual_tal_event3.png",
         category: "Chapters",
-        mode: "Offline",
-        location: "Seminar Hall 2",
+        eventType: "Chapter Meet",
+        eventDate: "26th August 2026",
+        eventLocation: "Platform: Google Meet",
+        description: [
+            "IEEE HIT SB proudly hosted an exclusive online session with Mr. Sai Yamanoor, a US-based expert in embedded systems and IoT and Subject Matter Expert in Low-Cost IoT-Enabled Product Development at Cepheid on the 26th of July 2025. With his extensive experience in designing scalable automation and edge computing solutions, Mr. Yamanoor brought a wealth of knowledge and practical insights to the session.",
+            "Titled “Edge Device Development & Their Advantages,” the talk explored the rapidly evolving world of edge computing, highlighting how edge devices are revolutionizing real-world applications. Participants gained firsthand understanding of designing efficient IoT solutions, integrating smart devices, and leveraging edge technology to optimize performance, reduce latency, and enhance data processing",
+           "The session concluded with an interactive Q&A, where attendees had the opportunity to engage directly with Mr. Yamanoor, clarifying doubts and exploring innovative ideas. This insightful talk reflected IEEE HIT SB’s mission to connect students with global industry leaders, spark innovation, and empower aspiring engineers to explore the cutting edge of technology.",
+        ],
+        images: ["/events/vitual_tal_event3.png"],
+        knowMoreLink: READ_MORE_URL,
     },
-    {
-        id: 4,
-        title: "18 hardware labs ran this year alone",
-        desc: "From PCB design to embedded C, hands-on sessions kept first-years building from week one.",
-        fullDesc: "From custom PCB layout design to embedded C programming on microcontrollers, these hands-on hardware lab sessions kept first- and second-year students building real circuits from week one of the academic term.",
-        author: "Workshop recap",
-        date: "Aug 20, 2026",
-        image: "/events/2024_event2.jpg",
-        category: "Workshops",
-        mode: "Offline",
-        location: "ECE Department Labs",
-    },
+{
+    id: 4,
+    title: "SHE: Strength.Hope.Empowerment.",
+    desc: "An online WIE Week event celebrating women in engineering through photography, poster making, and creative writing.",
+    author: "WIE recap",
+    date: "1st July 2025(WIE Week)",
+    image: "/events/SHE_event4.png",
+    category: "Workshops",
+    eventType: "Celebrating Women in Engineering",
+    eventDate: "1st–15th July 2025",
+    eventLocation: "Online",
+    description: [
+        "IEEE HIT SB proudly hosted SHE: Strength. Hope. Empowerment, encouraging participation from 1st July 2025 to 15th July 2025, as part of WIE Week, celebrating the brilliance, resilience, and leadership of women in engineering. This unique online event showcased the creativity and vision of participants across Photography, Poster Making, and Creative Writing, all centred around the theme of Women Empowerment in STEM.",
+        "The result was a vibrant display of talent and expression, where participants brought their ideas to life through compelling visuals, powerful narratives, and artistic designs. From thought-provoking essays to striking posters and captivating photographs, each entry highlighted the innovation, dedication, and creativity of budding engineers, inspiring everyone who joined the celebration.",
+        "The event concluded with a lively recognition of winners and participants, applauding their contributions and passion. SHE 2025 was more than a competition—it was a heartfelt celebration of women in STEM, creativity, and leadership. Through this initiative, IEEE HIT SB continues to amplify voices, foster inclusivity, and inspire the next generation of women engineers.",
+    ],
+    images: ["/events/2024_event2.jpg", "/events/2024_event1.jpg", "/events/2026_event1.jpg"],
+    knowMoreLink: READ_MORE_URL,
+},
     {
         id: 5,
-        title: "Alumni came back to talk shop",
+        title: "Virtual Talk Session on Putting the DevOps Standard into Practice",
         desc: "Engineers from signal processing backgrounds shared real career paths with current members.",
-        fullDesc: "Experienced alumni working in core electrical engineering and digital signal processing returned to campus to share invaluable career trajectories, industry expectations, and technical insights with current student members.",
         author: "Tech Talks",
-        date: "Aug 14, 2026",
-        image: "/events/2025_event1.jpg",
+        date: "21st May 2025",
+        image: "/events/vitual_talk_event5.png",
         category: "Talks",
-        mode: "Offline",
-        location: "Electrical Department Auditorium",
+        eventType: "Technical Talk",
+        eventDate: "14th August 2026",
+        eventLocation: "Platform: Google Meety",
+        description: [
+            "IEEE HIT SB successfully hosted an exclusive online session with Ms. Ruth G. Lennon, a globally recognized expert in DevOps standardization and research. Ms. Lennon, who serves as DevOps Lecturer & Researcher, Chair of NSAI WG11, ACM-W Global Past Chair, and STEM Project Lead at ATU Letterkenny, Ireland, shared her extensive experience and insights into how DevOps standards influence modern software engineering.",
+        ],
+        images: ["/events/vitual_talk_event5.png"],
+        knowMoreLink: READ_MORE_URL,
     },
     {
         id: 6,
-        title: "First research papers, submitted and reviewed",
+        title: "Pyduino",
         desc: "Mentorship paired first-time authors with seniors, taking projects from draft to presentation.",
-        fullDesc: "Dedicated mentorship paired first-time student authors with senior researchers and faculty guides, successfully taking experimental IoT and power electronics projects from initial drafts to peer-reviewed conference presentations.",
         author: "Research",
         date: "Aug 8, 2026",
-        image: "/events/2025_event2.jpg",
+        image: "/events/pyduino_event6.png",
         category: "Press",
-        mode: "Offline",
-        location: "Research Wing, HIT",
+        eventType: "Technical",
+        eventDate: "8th August 2026",
+        eventLocation: "Room 6108 Electrical Department Haldia Institute of Technology",
+        description: [
+            "IEEE HIT SB successfully hosted PyDuino, a three-day interactive workshop that brought Python programming and Arduino hardware together in an exciting hands-on experience. Students dived into coding fundamentals, explored MediaPipe-based computer vision, and learned to control circuits and sensors- transforming their ideas into working tech projects.",
+        ],
+        images: ["/events/2025_event2.jpg", "/events/2025_event4.jpg"],
+        knowMoreLink: READ_MORE_URL,
     },
     {
         id: 7,
-        title: "Robotics, WIE, and CS now share one calendar",
+        title: "Interagado",
         desc: "Cross-chapter events made it easier for members to discover labs outside their own track.",
-        fullDesc: "Unified scheduling across Robotics, Women in Engineering (WIE), and Computer Society chapters has made it significantly easier for members to discover interdisciplinary labs and events outside their primary track.",
         author: "Chapters",
-        date: "Jul 30, 2026",
-        image: "/events/2025_event2.jpg",
+        date: " 9th April 2025 Time: 5:00 PM",
+        image: "/events/integrado_event7.png",
         category: "Chapters",
-        mode: "Hybrid",
-        location: "IEEE HIT SB Central Hub",
+        eventType: "Chapter Meet",
+        eventDate: "30th July 2026",
+        eventLocation: "Electrical Department, Haldia Institute of Technology",
+        description: [
+            "On the evening of 9th April 2025 at 5:00 PM, IEEE HIT SB hosted Interagado 2025, a vibrant ceremony marking the transition of student leadership and celebrating a year of innovation, dedication, and teamwork. Held offline at the Electrical Department, the event brought together outgoing and incoming office bearers for a memorable evening of reflection, recognition, and inspiration.",
+        ],
+        images: ["/events/2025_event2.jpg", "/events/2025_event1.jpg"],
+        knowMoreLink: READ_MORE_URL,
     },
     {
         id: 8,
-        title: "300+ pull requests merged through GSSoC",
+        title: "Virtual Talk on Low-Power Smart Electronics for IoT and Similar Applications",
         desc: "Members contributed to global open-source programs, learning Git workflows along the way.",
-        fullDesc: "Student members actively contributed to prominent global open-source repositories through GirlScript Summer of Code, mastering advanced Git branching workflows, code reviews, and issue resolution.",
         author: "Developer Track",
-        date: "Jul 22, 2026",
-        image: "/events/2025_event4.jpg",
+        date: " 2 April 2025 ",
+        image: "/events/virtual_talk_event8.png",
         category: "Workshops",
-        mode: "Online",
-        location: "Virtual / GitHub",
+        eventType: "Technical Talk",
+        eventDate: "22nd July 2026",
+        eventLocation: "Google Meet(Under IEEE Virtual Speakers Bureau)",
+        description: [
+            "On 2nd April 2025, IEEE HIT SB hosted an exciting online talk under the IEEE Virtual Speakers Bureau, featuring Dr. Sreelal S Pillai, Senior Scientist & Avionics Engineer at ISRO at 7 in the evening . With over 33 years of experience, Dr. Pillai shared his insights on “Low Power Smart Electronics for IoT and Similar Applications,” offering a glimpse into the technologies shaping the future of smart, energy-efficient devices.",
+        ],
+        images: ["/events/virtual_talk_event8.png"],
+        knowMoreLink: READ_MORE_URL,
     },
     {
         id: 9,
-        title: "Members earned 120 certificates this term",
+        title: "ROBO-SOCCER",
         desc: "Workshop attendance and project completion now sync automatically to member profiles.",
-        fullDesc: "Automated tracking systems now securely sync workshop attendance and verified project completion directly to individual member profiles, issuing 120 official certifications this term alone.",
         author: "Membership",
-        date: "Jul 15, 2026",
-        image: "/events/2026_event1.jpg",
+        date: "28th February 2025",
+        image: "/events/roboscorrer_event9.png",
         category: "Workshops",
-        mode: "Online",
-        location: "IEEE Portal",
+        eventType: "Membership",
+        eventDate: "15th July 2026",
+        eventLocation: "HIT Basketball Ground",
+        description: [
+            "Fix-a-Robo: Robo Soccer Competition Event Type: Technical Event Date: 28th February 2025 Location: Basketball Court, Haldia Institute of Technology To commemorate National Science Day, the IEEE HIT Student Branch hosted the thrilling grand finale of its flagship robotics workshop Fix-a-Robo with the much-anticipated Robo Soccer Competition on 28th February 2025. Held at the Basketball Court of Haldia Institute of Technology, the event kicked off at 4:00 PM, drawing excitement from participants, spectators, and distinguished guests alike.",
+        ],
+        images: ["/events/2026_event1.jpg", "/events/2026_event2.jpg"],
+        knowMoreLink: READ_MORE_URL,
     },
     {
         id: 10,
-        title: "The branch turns 9 years old",
+        title: "RACE-a-ROBO",
         desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
-        fullDesc: "A commemorative celebration looking back at nine remarkable years of technical workshops, high-stakes hackathons, and the passionate cohorts of students who shaped the legacy of IEEE HIT SB.",
         author: "Branch history",
-        date: "Jul 1, 2026",
-        image: "/events/2025_event4.jpg",
+        date: "23rd February 2025",
+        image: "/events/racearobo_event10.jpg",
         category: "Press",
-        mode: "Offline",
-        location: "Main Campus Grounds",
+        eventType: "Celebration",
+        eventDate: "1st July 2026",
+        eventLocation: "Main Campus Grounds",
+        description: [
+            "Designed to test participants' abilities in both speed and precision, the event challenged teams to race their self-assembled, semi-autonomous bots through a specially curated track featuring sharp turns, checkpoints, and time-bound objectives. The event drew enthusiastic participation from students who had previously taken part in the Fix-a-Robo workshop. Each team utilized WiFi modules, Arduino-based microcontrollers, and real-time programming techniques learned during the sessions, turning the competition into a vibrant showcase of applied knowledge.",
+        ],
+        images: ["/events/2025_event4.jpg", "/events/2026_event1.jpg", "/events/2026_event2.jpg"],
+        knowMoreLink: READ_MORE_URL,
     },
     {
         id: 11,
-        title: "The branch turns 9 years old (Milestone II)",
+        title: "FIX-a-ROBO",
         desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
-        fullDesc: "Continuing our 9th anniversary celebrations with special keynotes from founding student members and faculty advisors who laid the cornerstone of our IEEE student branch back in 2017.",
         author: "Branch history",
-        date: "Jul 1, 2026",
-        image: "/events/2026_event1.jpg",
+        date: "20th February 2025",
+        image: "/events/fixarobo_event11.jpg",
         category: "Press",
-        mode: "Offline",
-        location: "Main Campus Grounds",
+        eventType: "Celebration",
+        eventDate: "1st July 2026",
+        eventLocation: "Main Campus Grounds",
+        description: [
+            "The IEEE HIT Student Branch (SB) successfully organized Fix-a-Robo, an intensive, hands-on workshop aimed at building and programming WiFi-controlled semi-autonomous RC cars. Held from 20th to 23rd February 2025, the four-day event provided participants with in-depth practical exposure to embedded systems, robotics, and wireless communication, effectively bridging the gap between theoretical knowledge and real-world application.",
+        ],
+        images: ["/events/2026_event1.jpg", "/events/2025_event4.jpg"],
+        knowMoreLink: READ_MORE_URL,
     },
-    {
+      {
         id: 12,
-        title: "The branch turns 9 years old (Exhibition)",
+        title: "MODEL EXHIBITION",
         desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
-        fullDesc: "An exhibition showcasing hardware prototypes, software apps, and research papers published by IEEE HIT SB members over the past nine years of technical excellence.",
         author: "Branch history",
-        date: "Jul 1, 2026",
-        image: "/events/2026_event2.jpg",
+        date: "24th January 2025",
+        image: "/events/modal_exhibition_event12.png",
         category: "Press",
-        mode: "Offline",
-        location: "Exhibition Hall, HIT",
+        eventType: "Exhibition",
+        eventDate: "1st July 2026",
+        eventLocation: "Exhibition Hall, HIT",
+        description: [
+            "IEEE Student Branch of Haldia Institute of Technology successfully hosted its flagship annual Model Exhibition at 10:30 AM in the Electrical Engineering Department. The event served as a vibrant platform for students to showcase innovative, hands-on projects across multiple domains, encouraging technical excellence and collaborative learning.",
+        ],
+        images: ["/events/2026_event2.jpg", "/events/2026_event1.jpg"],
+        knowMoreLink: READ_MORE_URL,
+    },
+      {
+        id: 13,
+        title: "Shakti: Girl Child Day Distribution Event",
+        desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
+        author: "Branch history",
+        date: "11th October 2024",
+        image: "/events/shakti_event13.png",
+        category: "Press",
+        eventType: "Exhibition",
+        eventDate: "1st July 2026",
+        eventLocation: "Exhibition Hall, HIT",
+        description: [
+            "On October 11, 2024, the IEEE HIT Student Branch marked International Girl Child Day with the", "Shakti: Girl Child Day Distribution Event", "This heartfelt initiative was aimed at highlighting the importance of proper health and hygiene practices among underprivileged girls, empowering them to actively participate in their communities",
+            "In the spirit of giving, the team distributed thoughtfully curated gift hampers, which included essential items such as sanitary napkins, handwash, and other personal hygiene necessities, to girls in the localities of Haldia, including Gandhinagar and nearby communities close to the Abhinandan Boys Hostel.",
+        ],
+        images: ["/events/2026_event2.jpg", "/events/2026_event1.jpg"],
+        knowMoreLink: READ_MORE_URL,
+    },
+      {
+        id: 14,
+        title: "CIRCUITRIX",
+        desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
+        author: "Branch history",
+        date: "15th April 2024",
+        image: "/events/circuititx_event14.png",
+        category: "Press",
+        eventType: "Exhibition",
+        eventDate: "1st July 2026",
+        eventLocation: "Exhibition Hall, HIT",
+        description: [
+            "Organized by IEEE HIT SB, the CIRCUITRIX workshop kicked off with great enthusiasm, bringing together students eager to get hands-on with electronics. The event opened with a warm welcome and an overview of the activities planned over the three days, setting the tone for an engaging learning experience. Day 1 was all about bringing music to life—literally. The focus of the session was on creating Music Controlled DJ Lights, a fascinating project that combined creativity with circuitry. The day started with an introduction to the concept, followed by in-depth explanations of how each component works, especially the roles of transistors and condenser microphones in responding to sound. With step-by-step guidance, participants successfully built their own working circuits. The day wrapped up with lively discussions and a sense of accomplishment as their lights flickered to the beat of the music.",
+        ],
+        images: ["/events/2026_event2.jpg", "/events/2026_event1.jpg"],
+        knowMoreLink: READ_MORE_URL,
+    },
+      {
+        id: 15,
+        title: "ROBO-SOCCER",
+        desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
+        author: "Branch history",
+        date: "24th February 2024",
+        image: "/events/roboscorrer2_event15.jpg",
+        category: "Press",
+        eventType: "Exhibition",
+        eventDate: "1st July 2026",
+        eventLocation: "Exhibition Hall, HIT",
+        description: [
+            "IEEE HIT SB's annual workshop, Fix-A-Robo, concluded on February 24th with an enthralling Robo-Soccer competition taking center stage. A total of 27 teams entered the arena, contending in matches of a knockout format; teams in draws proceeded to penalty shootout matches.After the intense competition, only 12 teams advanced to the second round, followed by a fierce battle that saw 6 teams making it to the third round. The tension reached peak at the final showdown as it determined the top 3 teams based on overall scores in the final round.",
+        ],
+        images: ["/events/2026_event2.jpg", "/events/2026_event1.jpg"],
+        knowMoreLink: READ_MORE_URL,
     },
 ];
 
@@ -208,7 +328,7 @@ const RevealArticle = ({
 export default function Events() {
     const [active, setActive] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
-    const [selectedEvent, setSelectedEvent] = useState<typeof events[0] | null>(null);
+    const [selectedEvent, setSelectedEvent] = useState<(typeof events)[number] | null>(null);
 
     // Lock body scroll when modal is open
     useEffect(() => {
@@ -231,6 +351,8 @@ export default function Events() {
         const matchesSearch =
             e.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             e.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            e.description.join(" ").toLowerCase().includes(searchQuery.toLowerCase()) ||
+            e.eventLocation.toLowerCase().includes(searchQuery.toLowerCase()) ||
             e.author.toLowerCase().includes(searchQuery.toLowerCase());
 
         return matchesCategory && matchesSearch;
@@ -338,27 +460,20 @@ export default function Events() {
                                     }`}
                                 >
                                     {/* Clicking the card image or text opens the modal */}
-                                    <div 
+                                    <div
                                         onClick={() => setSelectedEvent(e)}
                                         className="w-full flex flex-col cursor-pointer"
                                     >
                                         <div className="relative mb-5 aspect-4/3 w-full overflow-hidden rounded-xl border border-zinc-800 bg-[#0e1013] transition-colors duration-300 group-hover:border-zinc-600">
                                             <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.04]">
                                                 {e.image && (
-                                                    <>
-                                                        <Image
-                                                            src={e.image}
-                                                            alt={e.title}
-                                                            fill
-                                                            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                                                            className="ev-img object-cover"
-                                                        />
-                                                        {e.tag && (
-                                                            <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                                                                <span className="text-3xl font-semibold tracking-tight text-white">{e.tag}</span>
-                                                            </div>
-                                                        )}
-                                                    </>
+                                                    <Image
+                                                        src={e.image}
+                                                        alt={e.title}
+                                                        fill
+                                                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                                                        className="ev-img object-cover"
+                                                    />
                                                 )}
                                             </div>
                                         </div>
@@ -366,12 +481,21 @@ export default function Events() {
                                         <h3 className="mb-2 text-xl leading-snug font-semibold tracking-tight text-zinc-50 transition-colors group-hover:text-white">
                                             {e.title}
                                         </h3>
-                                        <p className="mb-4 line-clamp-3 text-[15px] leading-relaxed text-zinc-400">{e.desc}</p>
-                                        <p className="mt-auto flex items-center gap-2 text-xs text-zinc-500">
-                                            <span className="font-medium text-zinc-300">{e.author}</span>
-                                            <span className="h-0.75 w-0.75 rounded-full bg-zinc-600" />
-                                            <span>{e.date}</span>
+                                        {/* only a short preview (3 lines) — the full text opens in the modal */}
+                                        <p className="mb-4 line-clamp-3 text-[15px] leading-relaxed text-zinc-400">
+                                            {e.description[0]}
                                         </p>
+
+                                        <div className="mt-auto space-y-1.5 text-xs text-zinc-500">
+                                            <p className="flex items-center gap-2">
+                                                <Calendar className="h-3.5 w-3.5 shrink-0 text-zinc-600" />
+                                                <span className="font-medium text-zinc-300">{e.eventDate}</span>
+                                            </p>
+                                            <p className="flex items-center gap-2">
+                                                <MapPin className="h-3.5 w-3.5 shrink-0 text-zinc-600" />
+                                                <span className="truncate">{e.eventLocation}</span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </RevealArticle>
                             ))}
@@ -387,9 +511,9 @@ export default function Events() {
 
             {/* Event Modal Component */}
             {selectedEvent && (
-                <EventModal 
-                    event={selectedEvent} 
-                    onClose={() => setSelectedEvent(null)} 
+                <EventModal
+                    event={selectedEvent}
+                    onClose={() => setSelectedEvent(null)}
                 />
             )}
         </>
