@@ -34,7 +34,7 @@ const events = [
             "HIT SB successfully hosted CircuitHack 2026, an immersive three-day hackathon that brought the excitement of competitive coding and hardware building to HIT. Participants explored the fascinating world of rapid prototyping through a perfect blend of software engineering, IoT sensors, and collaborative development.",
             "The event gave students the unique opportunity to design, assemble, and pitch their own working prototypes, combining technical innovation with teamwork under strict time limits.",
         ],
-        images: ["/events/2024_event1.jpg", "/events/2024_event2.jpg", "/events/2025_event1.jpg"],
+        images: ["/events/aero-botix2.jpeg", "/events/aero-botix3.jpeg", "/events/aero-botix4.jpeg"],
         knowMoreLink: READ_MORE_URL,
     },
     {
@@ -53,7 +53,7 @@ const events = [
             "The workshop kicked off with an engaging blend of theory, simulation, and problem-solving, covering topics such as libraries, notations, circuit analysis, graph plotting, source configurations, and Thevenin’s theorem. As participants progressed, they explored advanced concepts including DC sources, damping, command functions, Op-Amp subcircuits, MOSFET modeling, and efficient component placement, turning classroom knowledge into functional and optimized circuits",
             "Led by Asst. Prof. Piya Roy, Asst. Prof. Alpana Barman, and guided by faculty mentors Assoc. Prof. Sandip Kumar Ojha, Assoc. Prof. Pratyay Konar, Asst. Prof. Saubhik Maulik, and Asst. Prof. Goutam Das, the sessions were interactive, insightful, and highly practical. The workshop concluded with a certificate distribution ceremony, celebrating the dedication, creativity, and technical growth of all participants, leaving them inspired to innovate and simulate with confidence.",
         ],
-        images: ["/events/2024_event2.jpg", "/events/2025_event2.jpg"],
+        images: ["/events/pspice2.webp", "/events/pspice3.webp"],
         knowMoreLink: READ_MORE_URL,
     },
     {
@@ -91,7 +91,7 @@ const events = [
         "The result was a vibrant display of talent and expression, where participants brought their ideas to life through compelling visuals, powerful narratives, and artistic designs. From thought-provoking essays to striking posters and captivating photographs, each entry highlighted the innovation, dedication, and creativity of budding engineers, inspiring everyone who joined the celebration.",
         "The event concluded with a lively recognition of winners and participants, applauding their contributions and passion. SHE 2025 was more than a competition—it was a heartfelt celebration of women in STEM, creativity, and leadership. Through this initiative, IEEE HIT SB continues to amplify voices, foster inclusivity, and inspire the next generation of women engineers.",
     ],
-    images: ["/events/2024_event2.jpg", "/events/2024_event1.jpg", "/events/2026_event1.jpg"],
+    images: ["/events/SHE2.jpg", "/events/SHE3.jpg", "/events/SHE4.jpg"],
     knowMoreLink: READ_MORE_URL,
 },
     {
@@ -125,7 +125,7 @@ const events = [
         description: [
             "IEEE HIT SB successfully hosted PyDuino, a three-day interactive workshop that brought Python programming and Arduino hardware together in an exciting hands-on experience. Students dived into coding fundamentals, explored MediaPipe-based computer vision, and learned to control circuits and sensors- transforming their ideas into working tech projects.",
         ],
-        images: ["/events/2025_event2.jpg", "/events/2025_event4.jpg"],
+        images: ["/events/pyduino2.jpg", "/events/pyduino3.jpg","/events/pyduino4.jpg"],
         knowMoreLink: READ_MORE_URL,
     },
     {
@@ -142,7 +142,7 @@ const events = [
         description: [
             "On the evening of 9th April 2025 at 5:00 PM, IEEE HIT SB hosted Interagado 2025, a vibrant ceremony marking the transition of student leadership and celebrating a year of innovation, dedication, and teamwork. Held offline at the Electrical Department, the event brought together outgoing and incoming office bearers for a memorable evening of reflection, recognition, and inspiration.",
         ],
-        images: ["/events/2025_event2.jpg", "/events/2025_event1.jpg"],
+        images: ["/events/interagado2.jpg", "/events/interagado3.jpg"],
         knowMoreLink: READ_MORE_URL,
     },
     {
@@ -176,7 +176,7 @@ const events = [
         description: [
             "Fix-a-Robo: Robo Soccer Competition Event Type: Technical Event Date: 28th February 2025 Location: Basketball Court, Haldia Institute of Technology To commemorate National Science Day, the IEEE HIT Student Branch hosted the thrilling grand finale of its flagship robotics workshop Fix-a-Robo with the much-anticipated Robo Soccer Competition on 28th February 2025. Held at the Basketball Court of Haldia Institute of Technology, the event kicked off at 4:00 PM, drawing excitement from participants, spectators, and distinguished guests alike.",
         ],
-        images: ["/events/2026_event1.jpg", "/events/2026_event2.jpg"],
+        images: ["/events/robo-scorer2.jpg", "/events/robo-scorer3.jpg"],
         knowMoreLink: READ_MORE_URL,
     },
     {
@@ -193,7 +193,7 @@ const events = [
         description: [
             "Designed to test participants' abilities in both speed and precision, the event challenged teams to race their self-assembled, semi-autonomous bots through a specially curated track featuring sharp turns, checkpoints, and time-bound objectives. The event drew enthusiastic participation from students who had previously taken part in the Fix-a-Robo workshop. Each team utilized WiFi modules, Arduino-based microcontrollers, and real-time programming techniques learned during the sessions, turning the competition into a vibrant showcase of applied knowledge.",
         ],
-        images: ["/events/2025_event4.jpg", "/events/2026_event1.jpg", "/events/2026_event2.jpg"],
+        images: ["/events/race-a-robo2.jpg", "/events/race-a-robo3.jpg", "/events/2026_event2.jpg"],
         knowMoreLink: READ_MORE_URL,
     },
     {
@@ -210,7 +210,7 @@ const events = [
         description: [
             "The IEEE HIT Student Branch (SB) successfully organized Fix-a-Robo, an intensive, hands-on workshop aimed at building and programming WiFi-controlled semi-autonomous RC cars. Held from 20th to 23rd February 2025, the four-day event provided participants with in-depth practical exposure to embedded systems, robotics, and wireless communication, effectively bridging the gap between theoretical knowledge and real-world application.",
         ],
-        images: ["/events/2026_event1.jpg", "/events/2025_event4.jpg"],
+        images: ["/events/fix-a-robo2.jpg", "/events/fix-a-robo3.jpg","/events/fix-a-robo4.jpg"],
         knowMoreLink: READ_MORE_URL,
     },
       {
@@ -227,7 +227,7 @@ const events = [
         description: [
             "IEEE Student Branch of Haldia Institute of Technology successfully hosted its flagship annual Model Exhibition at 10:30 AM in the Electrical Engineering Department. The event served as a vibrant platform for students to showcase innovative, hands-on projects across multiple domains, encouraging technical excellence and collaborative learning.",
         ],
-        images: ["/events/2026_event2.jpg", "/events/2026_event1.jpg"],
+        images: ["/events/model-exhibition2.jpg", "/events/model-exhibition3.jpg","/events/model-exhibition4.jpg"],
         knowMoreLink: READ_MORE_URL,
     },
       {
@@ -245,7 +245,7 @@ const events = [
             "On October 11, 2024, the IEEE HIT Student Branch marked International Girl Child Day with the", "Shakti: Girl Child Day Distribution Event", "This heartfelt initiative was aimed at highlighting the importance of proper health and hygiene practices among underprivileged girls, empowering them to actively participate in their communities",
             "In the spirit of giving, the team distributed thoughtfully curated gift hampers, which included essential items such as sanitary napkins, handwash, and other personal hygiene necessities, to girls in the localities of Haldia, including Gandhinagar and nearby communities close to the Abhinandan Boys Hostel.",
         ],
-        images: ["/events/2026_event2.jpg", "/events/2026_event1.jpg"],
+        images: ["/events/shakti2.jpg", "/events/shakti3.jpg","/events/shakti4.jpg"],
         knowMoreLink: READ_MORE_URL,
     },
       {
@@ -262,7 +262,7 @@ const events = [
         description: [
             "Organized by IEEE HIT SB, the CIRCUITRIX workshop kicked off with great enthusiasm, bringing together students eager to get hands-on with electronics. The event opened with a warm welcome and an overview of the activities planned over the three days, setting the tone for an engaging learning experience. Day 1 was all about bringing music to life—literally. The focus of the session was on creating Music Controlled DJ Lights, a fascinating project that combined creativity with circuitry. The day started with an introduction to the concept, followed by in-depth explanations of how each component works, especially the roles of transistors and condenser microphones in responding to sound. With step-by-step guidance, participants successfully built their own working circuits. The day wrapped up with lively discussions and a sense of accomplishment as their lights flickered to the beat of the music.",
         ],
-        images: ["/events/2026_event2.jpg", "/events/2026_event1.jpg"],
+        images: ["/events/circuitix2.jpg", "/events/circuitix3.jpg"],
         knowMoreLink: READ_MORE_URL,
     },
       {
@@ -279,7 +279,7 @@ const events = [
         description: [
             "IEEE HIT SB's annual workshop, Fix-A-Robo, concluded on February 24th with an enthralling Robo-Soccer competition taking center stage. A total of 27 teams entered the arena, contending in matches of a knockout format; teams in draws proceeded to penalty shootout matches.After the intense competition, only 12 teams advanced to the second round, followed by a fierce battle that saw 6 teams making it to the third round. The tension reached peak at the final showdown as it determined the top 3 teams based on overall scores in the final round.",
         ],
-        images: ["/events/2026_event2.jpg", "/events/2026_event1.jpg"],
+        images: ["/events/roboscorrer2_event15.jpg"],
         knowMoreLink: READ_MORE_URL,
     },
 ];
