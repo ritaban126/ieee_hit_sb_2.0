@@ -1,13 +1,13 @@
 "use client";
 
+
 import { useEffect, useRef, useState } from "react";
 import type { CSSProperties, ReactNode } from "react";
 import { Search, Rss } from "lucide-react";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
+import EventModal from "@/components/events/EventModal";
 
-// FONT FIX: Poppins was only being loaded by the Hero's <style> on the home page,
-// so the Events page had no font. Loading it here makes this page self-contained.
 const poppins = Poppins({
     subsets: ["latin"],
     weight: ["300", "400", "500", "600", "700"],
@@ -18,110 +18,153 @@ const filters = ["All", "Workshops", "Hackathons", "Talks", "Chapters", "Press"]
 
 const events = [
     {
+        id: 1,
         title: "CircuitHack 2026 closed with 300+ builders",
         desc: "Teams shipped AI tools, IoT sensors, and full-stack apps across three tracks in 24 hours.",
+        fullDesc: "HIT SB successfully hosted CircuitHack 2026, an immersive three-day hackathon that brought the excitement of competitive coding and hardware building to HIT. Participants explored the fascinating world of rapid prototyping through a perfect blend of software engineering, IoT sensors, and collaborative development. The event gave students the unique opportunity to design, assemble, and pitch their own working prototypes, combining technical innovation with teamwork under strict time limits.",
         author: "Hackathon recap",
         date: "Aug 31, 2026",
         image: "/events/2024_event1.jpg",
         category: "Hackathons",
         tag: "ramp",
+        mode: "Offline",
+        location: "Main Auditorium, Haldia Institute of Technology",
     },
     {
+        id: 2,
         title: "Styling the branch site for the future",
         desc: "A long-running redesign that became an exercise in components, tokens, and clearer sections.",
+        fullDesc: "A long-running redesign that became an exercise in components, design tokens, and clearer grid layouts. Contributors restructured the entire frontend architecture using Next.js and Tailwind CSS to ensure lightning-fast performance and seamless responsiveness across all screen sizes.",
         author: "Kenneth Rao",
         date: "Aug 26, 2026",
         image: "/events/2024_event2.jpg",
         category: "Press",
+        mode: "Online / Hybrid",
+        location: "Developer Track HQ",
     },
     {
+        id: 3,
         title: "Sharing our growth with every chapter",
         desc: "As membership passes 500, we're giving every sub-committee more say in what we build next.",
+        fullDesc: "As membership passes 500 active student developers, we're empowering every sub-committee with more autonomy and direct say in what tools and workshops we build next for the campus community.",
         author: "Karri Iqbal",
         date: "Aug 26, 2026",
         image: "/events/2025_event1.jpg",
         category: "Chapters",
+        mode: "Offline",
+        location: "Seminar Hall 2",
     },
     {
+        id: 4,
         title: "18 hardware labs ran this year alone",
         desc: "From PCB design to embedded C, hands-on sessions kept first-years building from week one.",
+        fullDesc: "From custom PCB layout design to embedded C programming on microcontrollers, these hands-on hardware lab sessions kept first- and second-year students building real circuits from week one of the academic term.",
         author: "Workshop recap",
         date: "Aug 20, 2026",
         image: "/events/2024_event2.jpg",
         category: "Workshops",
+        mode: "Offline",
+        location: "ECE Department Labs",
     },
     {
+        id: 5,
         title: "Alumni came back to talk shop",
         desc: "Engineers from signal processing backgrounds shared real career paths with current members.",
+        fullDesc: "Experienced alumni working in core electrical engineering and digital signal processing returned to campus to share invaluable career trajectories, industry expectations, and technical insights with current student members.",
         author: "Tech Talks",
         date: "Aug 14, 2026",
         image: "/events/2025_event1.jpg",
         category: "Talks",
+        mode: "Offline",
+        location: "Electrical Department Auditorium",
     },
     {
+        id: 6,
         title: "First research papers, submitted and reviewed",
         desc: "Mentorship paired first-time authors with seniors, taking projects from draft to presentation.",
+        fullDesc: "Dedicated mentorship paired first-time student authors with senior researchers and faculty guides, successfully taking experimental IoT and power electronics projects from initial drafts to peer-reviewed conference presentations.",
         author: "Research",
         date: "Aug 8, 2026",
         image: "/events/2025_event2.jpg",
         category: "Press",
+        mode: "Offline",
+        location: "Research Wing, HIT",
     },
     {
+        id: 7,
         title: "Robotics, WIE, and CS now share one calendar",
         desc: "Cross-chapter events made it easier for members to discover labs outside their own track.",
+        fullDesc: "Unified scheduling across Robotics, Women in Engineering (WIE), and Computer Society chapters has made it significantly easier for members to discover interdisciplinary labs and events outside their primary track.",
         author: "Chapters",
         date: "Jul 30, 2026",
         image: "/events/2025_event2.jpg",
         category: "Chapters",
+        mode: "Hybrid",
+        location: "IEEE HIT SB Central Hub",
     },
     {
+        id: 8,
         title: "300+ pull requests merged through GSSoC",
         desc: "Members contributed to global open-source programs, learning Git workflows along the way.",
+        fullDesc: "Student members actively contributed to prominent global open-source repositories through GirlScript Summer of Code, mastering advanced Git branching workflows, code reviews, and issue resolution.",
         author: "Developer Track",
         date: "Jul 22, 2026",
         image: "/events/2025_event4.jpg",
         category: "Workshops",
+        mode: "Online",
+        location: "Virtual / GitHub",
     },
     {
+        id: 9,
         title: "Members earned 120 certificates this term",
         desc: "Workshop attendance and project completion now sync automatically to member profiles.",
+        fullDesc: "Automated tracking systems now securely sync workshop attendance and verified project completion directly to individual member profiles, issuing 120 official certifications this term alone.",
         author: "Membership",
         date: "Jul 15, 2026",
         image: "/events/2026_event1.jpg",
         category: "Workshops",
+        mode: "Online",
+        location: "IEEE Portal",
     },
     {
+        id: 10,
         title: "The branch turns 9 years old",
         desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
+        fullDesc: "A commemorative celebration looking back at nine remarkable years of technical workshops, high-stakes hackathons, and the passionate cohorts of students who shaped the legacy of IEEE HIT SB.",
         author: "Branch history",
         date: "Jul 1, 2026",
         image: "/events/2025_event4.jpg",
         category: "Press",
+        mode: "Offline",
+        location: "Main Campus Grounds",
     },
     {
-        title: "The branch turns 9 years old",
+        id: 11,
+        title: "The branch turns 9 years old (Milestone II)",
         desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
+        fullDesc: "Continuing our 9th anniversary celebrations with special keynotes from founding student members and faculty advisors who laid the cornerstone of our IEEE student branch back in 2017.",
         author: "Branch history",
         date: "Jul 1, 2026",
         image: "/events/2026_event1.jpg",
         category: "Press",
+        mode: "Offline",
+        location: "Main Campus Grounds",
     },
     {
-        title: "The branch turns 9 years old",
+        id: 12,
+        title: "The branch turns 9 years old (Exhibition)",
         desc: "A look back at nine years of workshops, hackathons, and the students who built them.",
+        fullDesc: "An exhibition showcasing hardware prototypes, software apps, and research papers published by IEEE HIT SB members over the past nine years of technical excellence.",
         author: "Branch history",
         date: "Jul 1, 2026",
         image: "/events/2026_event2.jpg",
         category: "Press",
+        mode: "Offline",
+        location: "Exhibition Hall, HIT",
     },
 ];
 
-/* stagger index → animation delay (set through a CSS variable) */
 const stagger = (i: number) => ({ "--i": i }) as CSSProperties;
-
-/* -------------------------------------------------------------------------- */
-/*  Card wrapper: reveals (fade + rise) when it scrolls into view             */
-/* -------------------------------------------------------------------------- */
 
 const RevealArticle = ({
     index,
@@ -137,9 +180,7 @@ const RevealArticle = ({
 
     useEffect(() => {
         const el = ref.current;
-
         if (!el) return;
-
         const io = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
@@ -149,9 +190,7 @@ const RevealArticle = ({
             },
             { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
         );
-
         io.observe(el);
-
         return () => io.disconnect();
     }, []);
 
@@ -166,11 +205,23 @@ const RevealArticle = ({
     );
 };
 
-const Events = () => {
+export default function Events() {
     const [active, setActive] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
+    const [selectedEvent, setSelectedEvent] = useState<typeof events[0] | null>(null);
 
-    // Filter events based on the active category tab and search query input
+    // Lock body scroll when modal is open
+    useEffect(() => {
+        if (selectedEvent) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+        return () => {
+            document.body.style.overflow = "unset";
+        };
+    }, [selectedEvent]);
+
     const filteredEvents = events.filter((e) => {
         const matchesCategory =
             active === "All" ||
@@ -193,31 +244,23 @@ const Events = () => {
                         from { opacity: 0; transform: translateY(28px); }
                         to   { opacity: 1; transform: none; }
                     }
-
                     @keyframes evImg {
                         from { transform: scale(1.15); }
                         to   { transform: scale(1); }
                     }
-
-                    /* header: plays once when the page opens */
                     .ev-rv {
                         animation: evRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
                         animation-delay: calc(var(--i, 0) * 110ms + 100ms);
                     }
-
-                    /* cards: wait hidden, then rise when scrolled into view */
                     .ev-card { opacity: 0; }
-
                     .ev-card-in {
                         animation: evRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
                         animation-delay: var(--d, 0ms);
                     }
-
                     .ev-card-in .ev-img {
                         animation: evImg 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
                         animation-delay: var(--d, 0ms);
                     }
-
                     @media (prefers-reduced-motion: reduce) {
                         .ev-rv, .ev-card-in, .ev-card-in .ev-img { animation: none !important; }
                         .ev-card { opacity: 1 !important; }
@@ -226,7 +269,6 @@ const Events = () => {
             </style>
 
             <section className={`${poppins.className} relative w-full bg-black pt-20 pb-24 text-white antialiased`}>
-                {/* Container made wider and max-w expanded for larger side-by-side elements */}
                 <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
 
                     {/* ===== header ===== */}
@@ -284,48 +326,53 @@ const Events = () => {
                         </div>
                     </div>
 
-                    {/* ===== grid with card-to-card divider borders ===== */}
+                    {/* ===== grid ===== */}
                     {filteredEvents.length > 0 ? (
                         <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
                             {filteredEvents.map((e, i) => (
                                 <RevealArticle
-                                    // changing the tab changes the key, so the cards animate in again
-                                    key={`${active}-${e.image}-${i}`}
+                                    key={`${active}-${e.id}-${i}`}
                                     index={i}
                                     className={`group flex cursor-pointer flex-col ${
                                         i % 3 !== 2 ? "lg:border-r lg:border-zinc-800/80 lg:pr-8" : ""
                                     }`}
                                 >
-                                    <div className="relative mb-5 aspect-4/3 w-full overflow-hidden rounded-xl border border-zinc-800 bg-[#0e1013] transition-colors duration-300 group-hover:border-zinc-600">
-                                        <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.04]">
-                                            {e.image && (
-                                                <>
-                                                    <Image
-                                                        src={e.image}
-                                                        alt={e.title}
-                                                        fill
-                                                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                                                        className="ev-img object-cover"
-                                                    />
-                                                    {e.tag && (
-                                                        <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                                                            <span className="text-3xl font-semibold tracking-tight text-white">{e.tag}</span>
-                                                        </div>
-                                                    )}
-                                                </>
-                                            )}
+                                    {/* Clicking the card image or text opens the modal */}
+                                    <div 
+                                        onClick={() => setSelectedEvent(e)}
+                                        className="w-full flex flex-col cursor-pointer"
+                                    >
+                                        <div className="relative mb-5 aspect-4/3 w-full overflow-hidden rounded-xl border border-zinc-800 bg-[#0e1013] transition-colors duration-300 group-hover:border-zinc-600">
+                                            <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                                                {e.image && (
+                                                    <>
+                                                        <Image
+                                                            src={e.image}
+                                                            alt={e.title}
+                                                            fill
+                                                            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                                                            className="ev-img object-cover"
+                                                        />
+                                                        {e.tag && (
+                                                            <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                                                <span className="text-3xl font-semibold tracking-tight text-white">{e.tag}</span>
+                                                            </div>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <h3 className="mb-2 text-xl leading-snug font-semibold tracking-tight text-zinc-50 transition-colors group-hover:text-white">
-                                        {e.title}
-                                    </h3>
-                                    <p className="mb-4 line-clamp-3 text-[15px] leading-relaxed text-zinc-400">{e.desc}</p>
-                                    <p className="mt-auto flex items-center gap-2 text-xs text-zinc-500">
-                                        <span className="font-medium text-zinc-300">{e.author}</span>
-                                        <span className="h-0.75 w-0.75 rounded-full bg-zinc-600" />
-                                        <span>{e.date}</span>
-                                    </p>
+                                        <h3 className="mb-2 text-xl leading-snug font-semibold tracking-tight text-zinc-50 transition-colors group-hover:text-white">
+                                            {e.title}
+                                        </h3>
+                                        <p className="mb-4 line-clamp-3 text-[15px] leading-relaxed text-zinc-400">{e.desc}</p>
+                                        <p className="mt-auto flex items-center gap-2 text-xs text-zinc-500">
+                                            <span className="font-medium text-zinc-300">{e.author}</span>
+                                            <span className="h-0.75 w-0.75 rounded-full bg-zinc-600" />
+                                            <span>{e.date}</span>
+                                        </p>
+                                    </div>
                                 </RevealArticle>
                             ))}
                         </div>
@@ -337,11 +384,17 @@ const Events = () => {
 
                 </div>
             </section>
+
+            {/* Event Modal Component */}
+            {selectedEvent && (
+                <EventModal 
+                    event={selectedEvent} 
+                    onClose={() => setSelectedEvent(null)} 
+                />
+            )}
         </>
     );
-};
-
-export default Events;
+}
 
 
 
