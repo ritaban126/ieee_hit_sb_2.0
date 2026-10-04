@@ -1,8 +1,9 @@
 
-import Achivments from "@/components/sections/Achivments";
+// import Achivments from "@/components/sections/Achivments";
 import Events from "@/components/sections/Events";
 // import EventShowcase from "@/components/sections/Events";
-import Features from "@/components/sections/Features";
+// import Features from "@/components/sections/Features";
+import Features2 from "@/components/sections/Features2";
 import Footer from "@/components/sections/Footer";
 import Hero from "@/components/sections/Hero";
 // import { TextHoverEffect } from "@/components/sections/IeeeText";
@@ -26,12 +27,13 @@ export default function Home() {
 
       <div className="relative z-10">
         <Hero/>
-        <Features/>
+        <Features2/>
+        {/* <Features/> */}
         <Timeline/>
         <Events/>
         {/* <EventShowcase/> */}
         <Spotlight/>
-        <Achivments/>
+        {/* <Achivments/> */}
         <Community/>
         {/* <Membership/> */}
         {/* <IeeeText/> */}

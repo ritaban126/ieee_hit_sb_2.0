@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { Search, Rss } from "lucide-react";
 import Image from "next/image";
 import { Poppins } from "next/font/google";
@@ -115,6 +116,56 @@ const events = [
     },
 ];
 
+/* stagger index → animation delay (set through a CSS variable) */
+const stagger = (i: number) => ({ "--i": i }) as CSSProperties;
+
+/* -------------------------------------------------------------------------- */
+/*  Card wrapper: reveals (fade + rise) when it scrolls into view             */
+/* -------------------------------------------------------------------------- */
+
+const RevealArticle = ({
+    index,
+    className,
+    children,
+}: {
+    index: number;
+    className?: string;
+    children: ReactNode;
+}) => {
+    const ref = useRef<HTMLElement | null>(null);
+    const [shown, setShown] = useState(false);
+
+    useEffect(() => {
+        const el = ref.current;
+
+        if (!el) return;
+
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setShown(true);
+                    io.disconnect();
+                }
+            },
+            { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+        );
+
+        io.observe(el);
+
+        return () => io.disconnect();
+    }, []);
+
+    return (
+        <article
+            ref={ref}
+            className={`${className ?? ""} ev-card ${shown ? "ev-card-in" : ""}`}
+            style={{ "--d": `${(index % 3) * 110}ms` } as CSSProperties}
+        >
+            {children}
+        </article>
+    );
+};
+
 const Events = () => {
     const [active, setActive] = useState("All");
     const [searchQuery, setSearchQuery] = useState("");
@@ -135,115 +186,158 @@ const Events = () => {
     });
 
     return (
-        <section className={`${poppins.className} relative w-full bg-black pt-20 pb-24 text-white antialiased`}>
-            {/* Container made wider and max-w expanded for larger side-by-side elements */}
-            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+        <>
+            <style>
+                {`
+                    @keyframes evRise {
+                        from { opacity: 0; transform: translateY(28px); }
+                        to   { opacity: 1; transform: none; }
+                    }
 
-                {/* ===== header ===== */}
-                <div className="mb-14">
-                    <p className="mb-4 flex items-center gap-2 text-xs font-medium tracking-[0.2em] text-zinc-500 uppercase">
-                        <span className="h-1.5 w-1.5 rounded-full bg-white" />
-                        IEEE HIT SB · Newsroom
-                    </p>
+                    @keyframes evImg {
+                        from { transform: scale(1.15); }
+                        to   { transform: scale(1); }
+                    }
 
-                    <h1 className="bg-linear-to-b from-white to-zinc-500 bg-clip-text pb-1 text-5xl font-semibold tracking-tight text-transparent md:text-7xl">
-                        Now
-                    </h1>
-                    <p className="mt-4 max-w-xl text-base leading-relaxed text-zinc-400 md:text-lg">
-                        Updates, recaps, and stories from our branch: workshops, hackathons, talks, and everything in between.
-                    </p>
+                    /* header: plays once when the page opens */
+                    .ev-rv {
+                        animation: evRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+                        animation-delay: calc(var(--i, 0) * 110ms + 100ms);
+                    }
 
-                    {/* filters + search */}
-                    <div className="mt-10 flex flex-col justify-between gap-5 border-b border-zinc-800 md:flex-row md:items-center">
-                        <div className="flex flex-wrap gap-x-7 gap-y-2 text-sm">
-                            {filters.map((f) => (
-                                <button
-                                    key={f}
-                                    onClick={() => setActive(f)}
-                                    className={`relative pb-4 tracking-tight transition-colors ${
-                                        active === f ? "font-medium text-white" : "text-zinc-500 hover:text-zinc-300"
+                    /* cards: wait hidden, then rise when scrolled into view */
+                    .ev-card { opacity: 0; }
+
+                    .ev-card-in {
+                        animation: evRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+                        animation-delay: var(--d, 0ms);
+                    }
+
+                    .ev-card-in .ev-img {
+                        animation: evImg 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+                        animation-delay: var(--d, 0ms);
+                    }
+
+                    @media (prefers-reduced-motion: reduce) {
+                        .ev-rv, .ev-card-in, .ev-card-in .ev-img { animation: none !important; }
+                        .ev-card { opacity: 1 !important; }
+                    }
+                `}
+            </style>
+
+            <section className={`${poppins.className} relative w-full bg-black pt-20 pb-24 text-white antialiased`}>
+                {/* Container made wider and max-w expanded for larger side-by-side elements */}
+                <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+
+                    {/* ===== header ===== */}
+                    <div className="mb-14">
+                        <h1
+                            className="ev-rv bg-linear-to-b from-white to-zinc-500 bg-clip-text pb-1 text-5xl font-semibold tracking-tight text-transparent md:text-7xl"
+                            style={stagger(0)}
+                        >
+                            Beyond the classroom.
+                        </h1>
+                        <p
+                            className="ev-rv mt-4 max-w-xl text-base leading-relaxed text-zinc-400 md:text-lg"
+                            style={stagger(1)}
+                        >
+                            Where IEEE HIT SB members build, break, and learn by doing. Workshops, hackathons, and talks, all in one place.
+                        </p>
+
+                        {/* filters + search */}
+                        <div
+                            className="ev-rv mt-10 flex flex-col justify-between gap-5 border-b border-zinc-800 md:flex-row md:items-center"
+                            style={stagger(2)}
+                        >
+                            <div className="flex flex-wrap gap-x-7 gap-y-2 text-sm">
+                                {filters.map((f) => (
+                                    <button
+                                        key={f}
+                                        onClick={() => setActive(f)}
+                                        className={`relative pb-4 tracking-tight transition-colors ${
+                                            active === f ? "font-medium text-white" : "text-zinc-500 hover:text-zinc-300"
+                                        }`}
+                                    >
+                                        {f}
+                                        {active === f && (
+                                            <span className="absolute inset-x-0 -bottom-px h-px bg-white" />
+                                        )}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <div className="flex items-center gap-3 pb-4">
+                                <div className="flex w-full items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-2 transition-colors focus-within:border-zinc-600 md:w-64">
+                                    <Search className="h-4 w-4 text-zinc-500" />
+                                    <input
+                                        type="text"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        placeholder="Search..."
+                                        className="w-full bg-transparent text-sm text-white outline-none placeholder:text-zinc-500"
+                                    />
+                                </div>
+                                <button className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-800 text-zinc-500 transition-colors hover:border-zinc-600 hover:text-white">
+                                    <Rss className="h-4 w-4" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ===== grid with card-to-card divider borders ===== */}
+                    {filteredEvents.length > 0 ? (
+                        <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+                            {filteredEvents.map((e, i) => (
+                                <RevealArticle
+                                    // changing the tab changes the key, so the cards animate in again
+                                    key={`${active}-${e.image}-${i}`}
+                                    index={i}
+                                    className={`group flex cursor-pointer flex-col ${
+                                        i % 3 !== 2 ? "lg:border-r lg:border-zinc-800/80 lg:pr-8" : ""
                                     }`}
                                 >
-                                    {f}
-                                    {active === f && (
-                                        <span className="absolute inset-x-0 -bottom-px h-px bg-white" />
-                                    )}
-                                </button>
+                                    <div className="relative mb-5 aspect-4/3 w-full overflow-hidden rounded-xl border border-zinc-800 bg-[#0e1013] transition-colors duration-300 group-hover:border-zinc-600">
+                                        <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                                            {e.image && (
+                                                <>
+                                                    <Image
+                                                        src={e.image}
+                                                        alt={e.title}
+                                                        fill
+                                                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                                                        className="ev-img object-cover"
+                                                    />
+                                                    {e.tag && (
+                                                        <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                                                            <span className="text-3xl font-semibold tracking-tight text-white">{e.tag}</span>
+                                                        </div>
+                                                    )}
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <h3 className="mb-2 text-xl leading-snug font-semibold tracking-tight text-zinc-50 transition-colors group-hover:text-white">
+                                        {e.title}
+                                    </h3>
+                                    <p className="mb-4 line-clamp-3 text-[15px] leading-relaxed text-zinc-400">{e.desc}</p>
+                                    <p className="mt-auto flex items-center gap-2 text-xs text-zinc-500">
+                                        <span className="font-medium text-zinc-300">{e.author}</span>
+                                        <span className="h-0.75 w-0.75 rounded-full bg-zinc-600" />
+                                        <span>{e.date}</span>
+                                    </p>
+                                </RevealArticle>
                             ))}
                         </div>
-
-                        <div className="flex items-center gap-3 pb-4">
-                            <div className="flex w-full items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/60 px-3 py-2 transition-colors focus-within:border-zinc-600 md:w-64">
-                                <Search className="h-4 w-4 text-zinc-500" />
-                                <input
-                                    type="text"
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    placeholder="Search..."
-                                    className="w-full bg-transparent text-sm text-white outline-none placeholder:text-zinc-500"
-                                />
-                            </div>
-                            <button className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-800 text-zinc-500 transition-colors hover:border-zinc-600 hover:text-white">
-                                <Rss className="h-4 w-4" />
-                            </button>
+                    ) : (
+                        <div className="py-20 text-center text-zinc-500">
+                            <p className="text-lg">No events found matching &ldquo;{searchQuery}&rdquo;</p>
                         </div>
-                    </div>
+                    )}
+
                 </div>
-
-                {/* ===== grid with card-to-card divider borders ===== */}
-                {filteredEvents.length > 0 ? (
-                    <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
-                        {filteredEvents.map((e, i) => (
-                            <article
-                                key={i}
-                                className={`group flex cursor-pointer flex-col ${
-                                    i % 3 !== 2 ? "lg:border-r lg:border-zinc-800/80 lg:pr-8" : ""
-                                }`}
-                            >
-                                <div className="relative mb-5 aspect-4/3 w-full overflow-hidden rounded-xl border border-zinc-800 bg-[#0e1013] transition-colors duration-300 group-hover:border-zinc-600">
-                                    <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-[1.04]">
-                                        {e.image && (
-                                            <>
-                                                <Image
-                                                    src={e.image}
-                                                    alt={e.title}
-                                                    fill
-                                                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                                                    className="object-cover"
-                                                />
-                                                {e.tag && (
-                                                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                                                        <span className="text-3xl font-semibold tracking-tight text-white">{e.tag}</span>
-                                                    </div>
-                                                )}
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <h3 className="mb-2 text-xl leading-snug font-semibold tracking-tight text-zinc-50 transition-colors group-hover:text-white">
-                                    {e.title}
-                                    <span className="ml-1.5 inline-block text-zinc-500 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100">
-                                        ↗
-                                    </span>
-                                </h3>
-                                <p className="mb-4 line-clamp-3 text-[15px] leading-relaxed text-zinc-400">{e.desc}</p>
-                                <p className="mt-auto flex items-center gap-2 text-xs text-zinc-500">
-                                    <span className="font-medium text-zinc-300">{e.author}</span>
-                                    <span className="h-0.75 w-0.75 rounded-full bg-zinc-600" />
-                                    <span>{e.date}</span>
-                                </p>
-                            </article>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="py-20 text-center text-zinc-500">
-                        <p className="text-lg">No events found matching &ldquo;{searchQuery}&rdquo;</p>
-                    </div>
-                )}
-
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
 

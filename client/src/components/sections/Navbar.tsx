@@ -147,22 +147,22 @@ const Navbar = () => {
         <nav
             className={`${poppins.className} sticky top-0 left-0 flex flex-col items-center w-full border-b border-zinc-900 z-50 bg-black/90 backdrop-blur-md text-white antialiased`}
         >
-            <SectionWrapper className="w-full flex items-center justify-between px-4 py-3 md:px-8 md:py-4">
+            <SectionWrapper className="w-full flex items-center justify-between px-4 py-2 md:px-8 md:py-2.5">
                 
                 {/* ================= LOGO ================= */}
                 <Link
                     href="/"
                     className="flex items-center gap-3 text-white group"
                 >
-                    <div className="relative w-10 h-10 md:w-11 md:h-11 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
-                        <Image  
-                            src="/Ieeelogo.png"
-                            alt="IEEE HIT SB"
-                            fill
-                            priority
-                            className="object-contain"
-                        />
-                    </div>
+                 <div className="relative w-12 h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+                    <Image
+                        src="/Ieeelogo.png"
+                        alt="IEEE HIT SB"
+                        fill
+                        priority
+                        className="object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.25)]"
+                    />
+                </div>
 
                     <div className="flex flex-col justify-center leading-none">
                         <span className="text-base md:text-lg font-bold tracking-wide">

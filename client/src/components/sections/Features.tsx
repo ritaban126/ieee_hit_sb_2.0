@@ -198,7 +198,7 @@ const ExpandBtn = ({ className = "" }: { className?: string }) => (
 );
 
 /** faint dotted grid + soft top glow used behind visuals */
-const DotGrid = () => (
+ const DotGrid = () => (
     <>
         <div
             className="pointer-events-none absolute inset-0"
@@ -218,17 +218,17 @@ const DotGrid = () => (
 /* -------------------------------------------------------------------------- */
 
 const WorkshopVisual = () => (
-    <div className="absolute inset-0 flex items-center justify-center px-6 pt-8 pb-18">
-        <DotGrid />
+   <div className="absolute inset-0 flex items-center justify-center px-6 pt-8 pb-18">
+       <DotGrid />
 
-        <div className="relative w-full max-w-sm">
-            {/* stacked ghost cards for depth */}
-            <div className="rv absolute inset-0" style={stagger(0)}>
-                <div className="absolute inset-x-5 -top-2.5 h-10 rounded-xl border border-zinc-800 bg-zinc-900/50 opacity-60" />
+         <div className="relative w-full max-w-sm">
+             {/* stacked ghost cards for depth */}
+             <div className="rv absolute inset-0" style={stagger(0)}>
+                 <div className="absolute inset-x-5 -top-2.5 h-10 rounded-xl border border-zinc-800 bg-zinc-900/50 opacity-60" />
                 <div className="absolute inset-x-10 -top-5 h-10 rounded-xl border border-zinc-800 bg-zinc-900/40 opacity-35" />
             </div>
 
-            {/* main card */}
+           {/* main card */}
             <div
                 className="rv relative z-10 rounded-xl border border-zinc-800 bg-[#0e1013] p-4 shadow-[0_12px_40px_rgba(0,0,0,0.65)]"
                 style={stagger(1)}
@@ -394,6 +394,7 @@ const speakers = [
     { name: "Prof. Iyer", role: "VLSI Design", initials: "PI", pos: "top-[52%] left-[5%]", reverse: false, tone: 2, delay: "1.6s" },
     { name: "R. Das", role: "Career Paths", initials: "RD", pos: "top-[75%] right-[7%]", reverse: true, tone: 3, delay: "2.4s" },
 ];
+
 
 const TalkVisual = () => (
     <div className="absolute inset-0 overflow-hidden">
@@ -759,186 +760,191 @@ const bigFeature = {
 
 const Features = () => {
     return (
-        <>
-            <style>
-                {`
-                    /* ---------- keyframes ---------- */
-                    @keyframes ieeeFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-                    @keyframes ieeeDash  { to { stroke-dashoffset: -20; } }
-                    @keyframes ieeeBar   { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-                    @keyframes ieeeRise  { from { opacity: 0; transform: translateY(36px) scale(0.985); } to { opacity: 1; transform: none; } }
-                    @keyframes ieeePop   { from { opacity: 0; transform: translateY(14px) scale(0.97); } to { opacity: 1; transform: none; } }
-                    @keyframes ieeeGrow  { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
-                    @keyframes ieeeFade  { from { opacity: 0; } to { opacity: 1; } }
-                    @keyframes ieeeWipe  { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+         <>
+             <style>
+                 {`
+                     /* ---------- keyframes ---------- */
+                     @keyframes ieeeFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+                     @keyframes ieeeDash  { to { stroke-dashoffset: -20; } }
+                     @keyframes ieeeBar   { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+                     @keyframes ieeeRise  { from { opacity: 0; transform: translateY(36px) scale(0.985); } to { opacity: 1; transform: none; } }
+                     @keyframes ieeePop   { from { opacity: 0; transform: translateY(14px) scale(0.97); } to { opacity: 1; transform: none; } }
+                     @keyframes ieeeGrow  { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+                     @keyframes ieeeFade  { from { opacity: 0; } to { opacity: 1; } }
+                     @keyframes ieeeWipe  { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
 
-                    /* ---------- entrance: card / block ---------- */
-                    .reveal { opacity: 0; }
-                    .reveal-in {
-                        animation: ieeeRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-                        animation-delay: var(--d, 0ms);
-                    }
+                     /* ---------- entrance: card / block ---------- */
+                     .reveal { opacity: 0; }
+                     .reveal-in {
+                         animation: ieeeRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+                         animation-delay: var(--d, 0ms);
+                     }
 
-                    /* ---------- entrance: inner items (staggered by --i) ---------- */
-                    .rv { opacity: 0; }
-                    .reveal-in .rv {
-                        animation: ieeePop 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-                        animation-delay: calc(var(--i, 0) * 90ms + 300ms);
-                    }
-                    .rg { opacity: 0; }
-                    .reveal-in .rg {
-                        animation: ieeeGrow 1s cubic-bezier(0.16, 1, 0.3, 1) both;
-                        animation-delay: calc(var(--i, 0) * 140ms + 150ms);
-                    }
+                     /* ---------- entrance: inner items (staggered by --i) ---------- */
+                     .rv { opacity: 0; }
+                     .reveal-in .rv {
+                         animation: ieeePop 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+                         animation-delay: calc(var(--i, 0) * 90ms + 300ms);
+                     }
+                     .rg { opacity: 0; }
+                     .reveal-in .rg {
+                         animation: ieeeGrow 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+                         animation-delay: calc(var(--i, 0) * 140ms + 150ms);
+                     }
 
-                    /* ---------- entrance: special items ---------- */
-                    .ieee-fade { opacity: 0; }
-                    .reveal-in .ieee-fade { animation: ieeeFade 1.6s ease both; animation-delay: var(--fd, 0.3s); }
+                     /* ---------- entrance: special items ---------- */
+                     .ieee-fade { opacity: 0; }
+                     .reveal-in .ieee-fade { animation: ieeeFade 1.6s ease both; animation-delay: var(--fd, 0.3s); }
 
-                    .ieee-wipe { clip-path: inset(0 100% 0 0); }
-                    .reveal-in .ieee-wipe { animation: ieeeWipe 1.5s cubic-bezier(0.4, 0, 0.2, 1) both; animation-delay: 0.7s; }
+                     .ieee-wipe { clip-path: inset(0 100% 0 0); }
+                     .reveal-in .ieee-wipe { animation: ieeeWipe 1.5s cubic-bezier(0.4, 0, 0.2, 1) both; animation-delay: 0.7s; }
 
-                    .ieee-bar { transform: scaleX(0); transform-origin: left; }
-                    .reveal-in .ieee-bar { animation: ieeeBar 1.3s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.6s; }
+                     .ieee-bar { transform: scaleX(0); transform-origin: left; }
+                     .reveal-in .ieee-bar { animation: ieeeBar 1.3s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: 0.6s; }
 
-                    .ieee-arc { opacity: 0; }
-                    .reveal-in .ieee-arc { animation: ieeeDash 1.6s linear infinite, ieeeFade 1s ease 1.1s both; }
+                     .ieee-arc { opacity: 0; }
+                     .reveal-in .ieee-arc { animation: ieeeDash 1.6s linear infinite, ieeeFade 1s ease 1.1s both; }
 
-                    /* ---------- always-on ambient motion ---------- */
-                    .ieee-float { animation: ieeeFloat 5s ease-in-out infinite; }
+                     /* ---------- always-on ambient motion ---------- */
+                     .ieee-float { animation: ieeeFloat 5s ease-in-out infinite; }
 
-                    /* ---------- reduced motion: show everything instantly ---------- */
-                    @media (prefers-reduced-motion: reduce) {
-                        .reveal, .rv, .rg, .ieee-fade, .ieee-arc { opacity: 1 !important; }
-                        .ieee-wipe { clip-path: none !important; }
-                        .ieee-bar { transform: none !important; }
-                        .reveal-in, .reveal-in .rv, .reveal-in .rg, .reveal-in .ieee-fade,
-                        .reveal-in .ieee-wipe, .reveal-in .ieee-bar, .reveal-in .ieee-arc, .ieee-float {
-                            animation: none !important;
-                        }
-                    }
-                `}
-            </style>
+                     /* ---------- reduced motion: show everything instantly ---------- */
+                     @media (prefers-reduced-motion: reduce) {
+                         .reveal, .rv, .rg, .ieee-fade, .ieee-arc { opacity: 1 !important; }
+                         .ieee-wipe { clip-path: none !important; }
+                         .ieee-bar { transform: none !important; }
+                         .reveal-in, .reveal-in .rv, .reveal-in .rg, .reveal-in .ieee-fade,
+                         .reveal-in .ieee-wipe, .reveal-in .ieee-bar, .reveal-in .ieee-arc, .ieee-float {
+                             animation: none !important;
+                         }
+                     }
+                 `}
+             </style>
 
-            <section className="text-white pt-24 pb-6 w-full">
-                <div className="px-8 md:px-20 lg:px-28 xl:px-36">
+             <section className="text-white pt-24 pb-6 w-full">
+                 <div className="px-8 md:px-20 lg:px-28 xl:px-36">
 
-                    <Reveal className="max-w-2xl mb-16">
-                        <h2 className="text-3xl md:text-[38px] font-semibold leading-tight tracking-tight">
-                            <span className="text-white">Everything a technical branch needs. </span>
-                            <span className="text-zinc-500">Workshops, hackathons, and mentorship — designed to work individually or together.</span>
-                        </h2>
-                    </Reveal>
+                     <Reveal className="max-w-2xl mb-16">
+                         <h2 className="text-3xl md:text-[38px] font-semibold leading-tight tracking-tight">
+                             <span className="text-white">Everything a technical branch needs. </span>
+                             <span className="text-zinc-500">Workshops, hackathons, and mentorship — designed to work individually or together.</span>
+                         </h2>
+                     </Reveal>
 
-                    {/* ROW 1 — two wide cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        {features.map((f, i) => (
-                            <Reveal
-                                key={i}
-                                delay={i * 140}
-                                className="relative border border-zinc-800 hover:border-zinc-700 transition-colors duration-200 rounded-2xl bg-[#0e1013] overflow-hidden min-h-105 flex flex-col"
-                            >
-                                <ExpandBtn />
-                                <div className="p-7 pb-0 relative z-10">
-                                    <h3 className="rv text-lg font-semibold max-w-[85%] leading-snug" style={stagger(0)}>{f.title}</h3>
-                                </div>
-                                <div className="relative flex-1 mt-6 mx-4 mb-0 rounded-t-xl border border-zinc-800 border-b-0 bg-black/50 overflow-hidden">
-                                    <f.Visual />
-                                </div>
-                                <p className="rv absolute bottom-5 left-7 right-7 z-10 text-sm text-zinc-400 leading-relaxed bg-[#0e1013]/90 backdrop-blur-sm" style={stagger(2)}>{f.desc}</p>
-                            </Reveal>
-                        ))}
-                    </div>
+                     {/* ROW 1 — two wide cards */}
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                         {features.map((f, i) => (
+                             <Reveal
+                                 key={i}
+                                 delay={i * 140}
+                                 className="relative border border-zinc-800 hover:border-zinc-700 transition-colors duration-200 rounded-2xl bg-[#0e1013] overflow-hidden min-h-105 flex flex-col"
+                             >
+                                 <ExpandBtn />
+                                 <div className="p-7 pb-0 relative z-10">
+                                     <h3 className="rv text-lg font-semibold max-w-[85%] leading-snug" style={stagger(0)}>{f.title}</h3>
+                                 </div>
+                                 <div className="relative flex-1 mt-6 mx-4 mb-0 rounded-t-xl border border-zinc-800 border-b-0 bg-black/50 overflow-hidden">
+                                     <f.Visual />
+                                 </div>
+                                 <p className="rv absolute bottom-5 left-7 right-7 z-10 text-sm text-zinc-400 leading-relaxed bg-[#0e1013]/90 backdrop-blur-sm" style={stagger(2)}>{f.desc}</p>
+                             </Reveal>
+                         ))}
+                     </div>
 
-                    {/* ROW 2 — three tall cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                        {tallFeatures.map((f, i) => (
-                            <Reveal
-                                key={i}
-                                delay={i * 140}
-                                className="relative border border-zinc-800 rounded-2xl bg-[#0e1013] hover:bg-[#141518] hover:border-zinc-700 transition-colors duration-200 min-h-140 flex flex-col overflow-hidden"
-                            >
-                                <ExpandBtn />
-                                <div className="p-7 relative z-10">
-                                    <h3 className="rv text-lg font-semibold max-w-[85%] leading-snug" style={stagger(0)}>{f.title}</h3>
-                                </div>
-                                <div className="relative flex-1 min-h-70 overflow-hidden">
-                                    <f.Visual />
-                                </div>
-                                <p className="rv relative z-10 mt-auto p-7 pt-4 text-sm text-zinc-400 leading-relaxed" style={stagger(3)}>{f.desc}</p>
-                            </Reveal>
-                        ))}
-                    </div>
+                     {/* ROW 2 — three tall cards */}
+                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                         {tallFeatures.map((f, i) => (
+                             <Reveal
+                                 key={i}
+                                 delay={i * 140}
+                                 className="relative border border-zinc-800 rounded-2xl bg-[#0e1013] hover:bg-[#141518] hover:border-zinc-700 transition-colors duration-200 min-h-140 flex flex-col overflow-hidden"
+                             >
+                                 <ExpandBtn />
+                                 <div className="p-7 relative z-10">
+                                     <h3 className="rv text-lg font-semibold max-w-[85%] leading-snug" style={stagger(0)}>{f.title}</h3>
+                                 </div>
+                                 <div className="relative flex-1 min-h-70 overflow-hidden">
+                                     <f.Visual />
+                                 </div>
+                                 <p className="rv relative z-10 mt-auto p-7 pt-4 text-sm text-zinc-400 leading-relaxed" style={stagger(3)}>{f.desc}</p>
+                             </Reveal>
+                         ))}
+                     </div>
 
-                    {/* ROW 3 — one big split card */}
-                    <Reveal className="relative border border-zinc-800 hover:border-zinc-700 transition-colors duration-200 rounded-2xl bg-[#0e1013] overflow-hidden min-h-85 flex flex-col md:flex-row items-stretch">
-                        <ExpandBtn />
-                        <div className="p-8 md:w-1/3 flex flex-col justify-center">
-                            <h3 className="rv text-xl font-semibold leading-snug mb-3" style={stagger(0)}>{bigFeature.title}</h3>
-                            <p className="rv text-sm text-zinc-400 leading-relaxed" style={stagger(1)}>{bigFeature.desc}</p>
-                            <div className="mt-5 flex flex-wrap gap-2">
-                                {bigFeature.tags.map((t, i) => (
-                                    <span
-                                        key={t}
-                                        className="rv rounded-full border border-zinc-800 bg-black/40 px-3 py-1 text-[11px] text-zinc-400"
-                                        style={stagger(2 + i)}
-                                    >
-                                        {t}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="relative md:w-2/3 border-t md:border-t-0 md:border-l border-zinc-800 bg-black/40 min-h-64 md:min-h-full overflow-hidden">
-                            <DotGrid />
-                            <ChaptersMap />
-                        </div>
-                    </Reveal>
+                     {/* ROW 3 — one big split card */}
+                     <Reveal className="relative border border-zinc-800 hover:border-zinc-700 transition-colors duration-200 rounded-2xl bg-[#0e1013] overflow-hidden min-h-85 flex flex-col md:flex-row items-stretch">
+                         <ExpandBtn />
+                         <div className="p-8 md:w-1/3 flex flex-col justify-center">
+                             <h3 className="rv text-xl font-semibold leading-snug mb-3" style={stagger(0)}>{bigFeature.title}</h3>
+                             <p className="rv text-sm text-zinc-400 leading-relaxed" style={stagger(1)}>{bigFeature.desc}</p>
+                             <div className="mt-5 flex flex-wrap gap-2">
+                                 {bigFeature.tags.map((t, i) => (
+                                     <span
+                                         key={t}
+                                         className="rv rounded-full border border-zinc-800 bg-black/40 px-3 py-1 text-[11px] text-zinc-400"
+                                         style={stagger(2 + i)}
+                                     >
+                                         {t}
+                                     </span>
+                                 ))}
+                             </div>
+                         </div>
+                         <div className="relative md:w-2/3 border-t md:border-t-0 md:border-l border-zinc-800 bg-black/40 min-h-64 md:min-h-full overflow-hidden">
+                             <DotGrid />
+                             <ChaptersMap />
+                         </div>
+                     </Reveal>
 
-                </div>
-            </section>
+                 </div>
+             </section>
 
-            <SectionWrapper className="z-10">
-                <div className="w-full border-t border-zinc-800"></div>
-            </SectionWrapper>
-        </>
-    );
-};
+             <SectionWrapper className="z-10">
+                 <div className="w-full border-t border-zinc-800"></div>
+             </SectionWrapper>
+         </>
+     );
+ };
 
-export default Features;
-
-
+ export default Features;
 
 
 
 
-// import SectionWrapper from "../ui/SectionWrapper";
 
-// const columns = [
-//     {
-//         fig: "FIG 0.1",
-//         title: "Run workshops that actually stick",
-//         desc: "Hands-on sessions in PCB design, embedded C, and robotics — led by seniors, open to first-years.",
-//         icon: (
-//             <svg viewBox="0 0 300 260" fill="none" className="w-full h-full">
-//                 <g stroke="currentColor" strokeWidth="1.2" opacity="0.75">
-//                     {/* top diamond cap */}
-//                     <path d="M150 40 L230 82 L150 124 L70 82 Z" />
-//                     <ellipse cx="150" cy="82" rx="45" ry="14" opacity="0.85" />
-//                     <path d="M108 76 Q150 96 192 76" opacity="0.85" />
-//                     <path d="M112 84 Q150 100 188 84" opacity="0.75" />
-//                     <path d="M118 92 Q150 104 182 92" opacity="0.65" />
 
-//                     {/* stacked layers */}
-//                     {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-//                         <g key={i} transform={`translate(0, ${96 + i * 12})`}>
-//                             <path d="M70 0 L150 42 L230 0" strokeDasharray={i % 2 === 0 ? "0" : "2 3"} />
-//                             <line x1="70" y1="0" x2="70" y2="12" />
-//                             <line x1="230" y1="0" x2="230" y2="12" />
-//                         </g>
-//                     ))}
-//                     <path d="M70 96 L150 138 L230 96" />
-//                 </g>
-//             </svg>
+
+
+
+
+
+//  import SectionWrapper from "../ui/SectionWrapper";
+
+//  const columns = [
+//      {
+//          fig: "FIG 0.1",
+//          title: "Run workshops that actually stick",
+//          desc: "Hands-on sessions in PCB design, embedded C, and robotics — led by seniors, open to first-years.",
+//          icon: (
+//              <svg viewBox="0 0 300 260" fill="none" className="w-full h-full">
+// //                 <g stroke="currentColor" strokeWidth="1.2" opacity="0.75">
+// //                     {/* top diamond cap */}
+// //                     <path d="M150 40 L230 82 L150 124 L70 82 Z" />
+// //                     <ellipse cx="150" cy="82" rx="45" ry="14" opacity="0.85" />
+// //                     <path d="M108 76 Q150 96 192 76" opacity="0.85" />
+// //                     <path d="M112 84 Q150 100 188 84" opacity="0.75" />
+// //                     <path d="M118 92 Q150 104 182 92" opacity="0.65" />
+
+// //                     {/* stacked layers */}
+// //                     {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+// //                         <g key={i} transform={`translate(0, ${96 + i * 12})`}>
+// //                             <path d="M70 0 L150 42 L230 0" strokeDasharray={i % 2 === 0 ? "0" : "2 3"} />
+// //                             <line x1="70" y1="0" x2="70" y2="12" />
+// //                             <line x1="230" y1="0" x2="230" y2="12" />
+// //                         </g>
+// //                     ))}
+// //                     <path d="M70 96 L150 138 L230 96" />
+// //                 </g>
+// //             </svg>
 //         ),
 //     },
 //     {
