@@ -333,7 +333,7 @@ const teamMembers = [
     {
         name: "Anik Kapat",
         role: "Assistant Secratary",
-        image: "/team/Anik kapat.png",
+        image: "/team/Anik_kapat2.png",
         linkedin: "https://www.linkedin.com/in/soumadip-mondal-b0b602246",
     },
     {
