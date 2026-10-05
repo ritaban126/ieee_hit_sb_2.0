@@ -848,6 +848,7 @@ import SectionWrapper from "../ui/SectionWrapper";
 type Achievement = {
     id: number;
     title: string;
+    tag: string;
     desc?: string;
     image?: string;
     href?: string;
@@ -862,65 +863,67 @@ const AUTO_SPEED = 25;
 const achievements: Achievement[] = [
     {
         id: 1,
-        title: "IEEE HIT SB performed best among all the branches.",
-        desc: "IEEE HIT SB performed best among all branches under Kharagpur Section.",
+        title: "IEEE HIT SB at HEL.",
+        desc: "IEEE HIT SB had the privilege of visiting Haldia Energy Limited (HEL) as part of an industrial exposure initiative.",
         year: "2025",
-        image: "/events/2026_event1.jpg",
-        href: READ_MORE_URL,
-    },
-    {
-        id: 2,
-        title: "Low-power IoT research paper presented at an IEEE conference",
-        desc: "Our members presented their first research paper on low-power IoT sensing, mentored by senior students and faculty.",
-        year: "2025",
-        image: "/events/2026_event2.jpg",
-        href: READ_MORE_URL,
-    },
-    {
-        id: 3,
-        title: "Our student branch is recognised for outstanding activity",
-        desc: "The branch was recognised for consistent events, member growth, and technical output across the year.",
-        year: "2024",
+        tag: "Industrial Visit",
         image: "/spotlight/spotlight_1.png",
         href: READ_MORE_URL,
     },
     {
-        id: 4,
-        title: "200+ students join our hands-on PCB design workshop",
-        desc: "A two-day, hands-on workshop that took first-years from schematic to a fabricated board.",
+        id: 2,
+        title: "IEEE HIT SB performed best among all the branches.",
+        desc: "IEEE HIT SB performed best among all branches under Kharagpur Section.",
         year: "2025",
+        tag: "Achievement",
         image: "/spotlight/spotlight_2.jpg",
         href: READ_MORE_URL,
     },
     {
-        id: 5,
-        title: "Our chapter joins the IEEE global student network",
-        desc: "Our branch is now part of the worldwide IEEE student network, sharing resources, labs, and events.",
+        id: 3,
+        title: "Best Design Award at IIT KGP.",
+        desc: "IEEE HIT SB won the Best Design Award at Kshitij, IIT Kharagpur.",
         year: "2024",
-        image: "/events/2026_event3.jpg",
+        tag: "Achievement",
+        image: "/spotlight/spotlight_3.png",
         href: READ_MORE_URL,
     },
-    {
-        id: 6,
-        title: "SwarmBot takes the Best Hardware Project award",
-        desc: "A swarm of small robots coordinating over a mesh network, built entirely by student members.",
-        year: "2025",
-        image: "/events/2026_event4.jpg",
-        href: READ_MORE_URL,
-    },
-    {
-        id: 7,
-        title: "Two members selected for the national robotics finals",
-        desc: "Two members made it through the national qualifiers and finished in the top ten at the finals.",
-        year: "2024",
-        image: "/events/2025_event4.jpg",
-        href: READ_MORE_URL,
-    },
+    // {
+    //     id: 4,
+    //     title: "200+ students join our hands-on PCB design workshop",
+    //     desc: "A two-day, hands-on workshop that took first-years from schematic to a fabricated board.",
+    //     year: "2025",
+    //     image: "/spotlight/spotlight_2.jpg",
+    //     href: READ_MORE_URL,
+    // },
+    // {
+    //     id: 5,
+    //     title: "Our chapter joins the IEEE global student network",
+    //     desc: "Our branch is now part of the worldwide IEEE student network, sharing resources, labs, and events.",
+    //     year: "2024",
+    //     image: "/events/2026_event3.jpg",
+    //     href: READ_MORE_URL,
+    // },
+    // {
+    //     id: 6,
+    //     title: "SwarmBot takes the Best Hardware Project award",
+    //     desc: "A swarm of small robots coordinating over a mesh network, built entirely by student members.",
+    //     year: "2025",
+    //     image: "/events/2026_event4.jpg",
+    //     href: READ_MORE_URL,
+    // },
+    // {
+    //     id: 7,
+    //     title: "Two members selected for the national robotics finals",
+    //     desc: "Two members made it through the national qualifiers and finished in the top ten at the finals.",
+    //     year: "2024",
+    //     image: "/events/2025_event4.jpg",
+    //     href: READ_MORE_URL,
+    // },
 ];
 
-/* -------------------------------------------------------------------------- */
-/*  Hover effect: a grid of blocks that fills the card one by one             */
-/* -------------------------------------------------------------------------- */
+
+//  Hover effect: a grid of blocks that fills the card one by one            
 
 const COLS = 8;
 const ROWS = 9;
@@ -935,9 +938,7 @@ for (let r = 0; r < ROWS; r++) {
     }
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Card visual                                                               */
-/* -------------------------------------------------------------------------- */
+//  Card visual                                                              
 
 const CardVisual = ({ a }: { a: Achievement }) => {
     if (a.image) {
@@ -967,9 +968,7 @@ const CardVisual = ({ a }: { a: Achievement }) => {
     );
 };
 
-/* -------------------------------------------------------------------------- */
-/*  One card (used for the real set and for the looped clone set)             */
-/* -------------------------------------------------------------------------- */
+// One card (used for the real set and for the looped clone set)            
 
 type CardProps = {
     a: Achievement;
@@ -1011,7 +1010,7 @@ const Card = ({ a, index, set, onExpand }: CardProps) => {
 
                     <div className="absolute inset-x-6 bottom-6">
                         <p className="text-xs font-medium tracking-[0.14em] text-cyan-300 uppercase">
-                            Achievement
+                            {a.tag}
                         </p>
                     </div>
 
@@ -1038,7 +1037,7 @@ const Card = ({ a, index, set, onExpand }: CardProps) => {
                         </p>
 
                         <p className="font-mono text-xs tracking-wider text-blue-200 uppercase">
-                            Achievement · {a.year}
+                            {a.tag} · {a.year}
                         </p>
                     </div>
 
@@ -1075,10 +1074,7 @@ const Card = ({ a, index, set, onExpand }: CardProps) => {
     );
 };
 
-/* -------------------------------------------------------------------------- */
-/*  Section                                                                   */
-/* -------------------------------------------------------------------------- */
-
+//  Section                                                                  
 const Spotlight = () => {
     const rootRef = useRef<HTMLDivElement | null>(null);
     const viewportRef = useRef<HTMLDivElement | null>(null);
@@ -1703,7 +1699,7 @@ const Spotlight = () => {
                         <div className="flex flex-col justify-between gap-8 p-7 md:p-10">
                             <div>
                                 <p className="text-xs font-medium tracking-[0.14em] text-cyan-300 uppercase">
-                                    Achievement · {selected.year}
+                                    {selected.tag} · {selected.year}
                                 </p>
 
                                 <h3 className="mt-4 text-2xl leading-snug font-semibold text-white md:text-3xl">

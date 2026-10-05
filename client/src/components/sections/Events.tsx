@@ -474,12 +474,12 @@ interface EventItem {
 
 const eventsData: EventItem[] = [
     {
-        title: "Code Friday: Full-Stack Architecture & System Design Masterclass",
-        tag: "FLAGSHIP INITIATIVE",
-        date: "Every Friday",
-        description: "A powerhouse of innovation where coders, creators, designers, and thinkers meet to turn ideas into impact.",
+        title: "Aero-Botix 1.0",
+        tag: "Technical",
+        date: "13th–15th September 2025",
+        description: "HIT SB successfully hosted Aero-Botix 1.0, an immersive three-day drone workshop that brought the excitement of aerial robotics to HIT for the very first time.",
         stats: "500+ active student participants per month",
-        image: "/events/2024_event1.jpg",
+        image: "/events/aero-botix4.jpeg",
         stat1Title: "540+ Active Members",
         stat1Desc: "Registered across computer science and engineering branches.",
         stat2Title: "62 Events Hosted",
@@ -488,12 +488,12 @@ const eventsData: EventItem[] = [
         stat3Desc: "Full-Stack Web, AI Integrations, Embedded Hardware & Systems."
     },
     {
-        title: "Annual TechHalt Hackathon & Innovation Summit",
-        tag: "ANNUAL HACKATHON",
+        title: "Pscpice",
+        tag: " Technical Workshop",
         date: "October 2026",
-        description: "When Python met Arduino - turning simple hand movements into a spark of intelligent automation.",
+        description: "IEEE HIT SB successfully conducted a two-day immersive PSpice Workshop on 8th and 9th August 2025.",
         stats: "$5,000+ in prizes and open-source grants",
-        image: "/events/2024_event1A.jpg",
+        image: "/events/pspice_event2.png",
         stat1Title: "36 Hours Straight",
         stat1Desc: "Continuous live hacking, mentorship, and project pitching.",
         stat2Title: "$5,000+ Grants",
@@ -502,12 +502,12 @@ const eventsData: EventItem[] = [
         stat3Desc: "AI/ML, Web3, Cloud Infrastructure, and IoT Tracks."
     },
     {
-        title: "Hardware & IoT Embedded Systems Bootcamp",
-        tag: "TECHNICAL WORKSHOP",
+        title: "Virtual Talk Session on Edge Device Development &Their Advantages",
+        tag: "Technical Talk",
         date: "Bi-Monthly",
-        description: "An engaging bot-making workshop that introduing the fundamentals of robotics through hands-on learning and innovation.",
+        description: "IEEE HIT SB proudly hosted an exclusive online session with Mr. Sai Yamanoor on the 26th of July 2025.",
         stats: "18+ specialized hardware labs hosted annually",
-        image: "/events/2024_event4.jpg",
+        image: "/events/vitual_tal_event3.png",
         stat1Title: "18+ Hardware Labs",
         stat1Desc: "Hands-on microcontrollers and digital logic experiments.",
         stat2Title: "Expert Led",
@@ -516,12 +516,12 @@ const eventsData: EventItem[] = [
         stat3Desc: "Direct hardware implementation and prototype testing."
     },
     {
-        title: "Open-Source Contribution & Git Workflows Masterclass",
-        tag: "DEVELOPER TRACK",
+        title: "SHE: Strength.Hope.Empowerment.",
+        tag: "Celebrating Women in Engineering",
         date: "Monthly",
-        description: "From wires to wings . Building drones from scratch and watching the ideas take flight.",
+        description: "IEEE HIT SB proudly hosted SHE: Strength. Hope. Empowerment , encouraging participations from 1st July 2025 to 15th July 2025, as part of WIE Week, celebrating the brilliance, resilience, and leadership of women in engineering.",
         stats: "300+ successful PRs merged globally",
-        image: "/events/2024_event2.jpg",
+        image: "/events/SHE3.jpg",
         stat1Title: "Global Programs",
         stat1Desc: "Mentorship for GirlScript Summer of Code and other initiatives.",
         stat2Title: "Version Control",
@@ -548,25 +548,31 @@ const Events = () => {
                 <div className="w-px bg-zinc-800"></div>
             </div>
 
-            <div className="relative z-10 px-8 md:px-20 lg:px-28 xl:px-36">
 
-                <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-16">
-                    <div className="max-w-2xl">
-                        <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight">
-                            Transforming student potential with
-                            <span className="text-zinc-400 block mt-1">practical engineering events</span>
-                        </h2>
-                    </div>
-                    <div className="max-w-md">
-                        <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
-                            Over 50% of active members have participated in our signature technical tracks—from building scalable web apps to engineering hardware systems.
-                        </p>
-                        <div className="mt-6">
-                        <Link href="/events">
-                            <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-colors duration-200">
-                                Explore all events <ArrowRight className="w-4 h-4" />
-                            </button>
-                        </Link>
+            <div className="relative z-10 px-8 md:px-20 lg:px-28 xl:px-36">
+              <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8 pb-16">
+                <div className="max-w-2xl">
+                    <h2 className="text-3xl md:text-5xl font-semibold tracking-tight leading-tight">
+                        Transforming student potential with
+                        <span className="text-zinc-400 block mt-1">
+                            practical engineering events
+                        </span>
+                    </h2>
+                </div>
+
+                <div className="max-w-md">
+                    <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
+                        Over 50% of our active members have contributed to hands-on technical
+                        initiatives, turning ideas into working systems through hardware design,
+                        embedded technologies, robotics, electronics, and IoT innovation.
+                    </p>
+                    <div className="mt-6">
+                            <Link href="/events">
+                                <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-colors duration-200">
+                                    Explore all events
+                                    <ArrowRight className="w-4 h-4" />
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -593,7 +599,7 @@ const Events = () => {
                                             <span className="text-xs font-semibold tracking-wider text-indigo-400 uppercase block mb-1">
                                                 {event.tag}
                                             </span>
-                                            <h4 className="text-xl md:text-2xl font-medium text-white group-hover:text-indigo-200 transition-colors">
+                                            <h4 className="text-xl md:text-4xl font-bold text-white group-hover:text-indigo-200 transition-colors">
                                                 {event.title}
                                             </h4>
                                         </div>
@@ -632,9 +638,9 @@ const Events = () => {
                                                 <div className="mb-8">
                                                     <div className="flex items-center justify-between pb-4 border-b border-zinc-800 text-xs md:text-sm">
                                                         <div className="flex items-center gap-3">
-                                                            <span className="flex items-center justify-center w-7 h-7 rounded bg-amber-500 text-black font-bold text-xs">
+                                                            {/* <span className="flex items-center justify-center w-7 h-7 rounded bg-amber-500 text-black font-bold text-xs">
                                                                 IEEE
-                                                            </span>
+                                                            </span> */}
                                                             <span className="font-medium text-white tracking-wide">
                                                                 IEEE HIT Student Branch powers technical excellence.
                                                             </span>
@@ -645,7 +651,7 @@ const Events = () => {
                                                             rel="noopener noreferrer"
                                                             className="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer"
                                                         >
-                                                            Read branch story <ArrowRight className="w-3.5 h-3.5" />
+                                                            VIEW ON DRIVE <ArrowRight className="w-3.5 h-3.5" />
                                                         </Link>
                                                     </div>
 
