@@ -19,9 +19,6 @@ export default function SignInPage() {
         <main
             className={`${poppins.className} relative min-h-screen overflow-hidden bg-black text-white`}
         >
-            {/* =========================================================
-                BACKGROUND
-            ========================================================= */}
             <div className="absolute inset-0">
                 {/* Radial glow */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.07),transparent_38%)]" />
@@ -45,11 +42,7 @@ export default function SignInPage() {
 
             {/* Dark + blur overlay */}
             <div className="absolute inset-0 bg-black/55 backdrop-blur-md" />
-
-            {/* =========================================================
-                FAKE BACKGROUND
-            ========================================================= */}
-            <div className="relative z-0 flex min-h-screen flex-col">
+            {/* <div className="relative z-0 flex min-h-screen flex-col">
                 <nav className="flex items-center justify-between border-b border-zinc-800/70 px-6 py-5 md:px-12">
                     <Link
                         href="/"
@@ -77,11 +70,9 @@ export default function SignInPage() {
                         </h1>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            {/* =========================================================
-                MODAL
-            ========================================================= */}
+                {/* MODAL */}
             <div className="absolute inset-0 z-20 flex items-center justify-center px-4 py-6">
                 <div className="relative w-full max-w-117.5">
                     {/* Outer glow */}
@@ -89,9 +80,8 @@ export default function SignInPage() {
 
                     {/* Modal */}
                     <div className="relative rounded-[22px] border border-zinc-800/90 bg-[#0b0b0b]/95 px-5 py-7 shadow-[0_25px_80px_rgba(0,0,0,0.75)] backdrop-blur-2xl sm:px-8 sm:py-8">
-                        {/* =================================================
-                            CLOSE BUTTON
-                        ================================================= */}
+
+                    {/* CLOSE BUTTON */}
                         <Link
                             href="/"
                             aria-label="Close sign in"

@@ -7,10 +7,9 @@ import SectionWrapper from "../ui/SectionWrapper";
 const IMAGE_SRC = "/heroparallex/N.jpg";
 
 const communityData = {
-    category: "Community",
+    // category: "Community",
     title: "Build, learn, and grow together.",
     cardOrg: "IEEE HIT STUDENT BRANCH",
-    cardTag: "COMMUNITY",
     cardLine1: "Open to all branches",
     cardLine2: "500+ Members",
     heading: "Join a community built for builders",
@@ -30,6 +29,23 @@ const communityData = {
 const Community = () => {
     return (
         <>
+            <style>
+            {`
+                @keyframes communityTitle {
+                from {
+                    opacity: 0;
+                    transform: translateY(18px);
+                    filter: blur(6px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                    filter: blur(0);
+                }
+                }
+            `}
+            </style>
             <section className="relative text-white pt-24 pb-16 w-full bg-black overflow-hidden">
 
                 {/* full height side lines — matches global page lines */}
@@ -41,12 +57,23 @@ const Community = () => {
                 <div className="relative z-10 px-8 md:px-20 lg:px-28 xl:px-36">
 
                     <div className="max-w-2xl mb-12">
-                        <p className="text-zinc-500 text-sm font-medium uppercase tracking-wider mb-2">{communityData.category}</p>
-                        <h2 className="text-3xl md:text-[38px] font-semibold leading-tight tracking-tight">
-                            <span className="text-white">{communityData.title}</span>
+                        {/* <p className="text-zinc-500 text-sm font-medium uppercase tracking-wider mb-2">{communityData.category}</p> */}
+                        <h2
+                        className="
+                            text-4xl
+                            md:text-[48px]
+                            lg:text-[52px]
+                            font-semibold
+                            leading-[1.08]
+                            tracking-tight
+                            animate-[communityTitle_0.8s_cubic-bezier(0.16,1,0.3,1)_both]
+                        "
+                        >
+                        <span className="text-white">
+                            {communityData.title}
+                        </span>
                         </h2>
                     </div>
-
                     <div className="relative border border-zinc-800 rounded-2xl bg-[#0e1013] overflow-hidden flex flex-col lg:flex-row items-stretch">
 
                         {/* ===== LEFT: red card, restored from the original book design ===== */}
@@ -58,9 +85,9 @@ const Community = () => {
 
                                     <div className="font-bold tracking-tighter text-2xl uppercase leading-none">
                                         {communityData.cardOrg}
-                                        <span className="text-xs block font-normal tracking-normal text-red-200 mt-1">
+                                        {/* <span className="text-xs block font-normal tracking-normal text-red-200 mt-1">
                                             {communityData.cardTag}
-                                        </span>
+                                        </span> */}
                                     </div>
 
                                     {/* image slot — swap IMAGE_SRC at the top of this file once you have a photo */}

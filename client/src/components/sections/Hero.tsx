@@ -240,14 +240,7 @@ import SectionWrapper from "@/components/ui/SectionWrapper";
 import { Globe } from "@/components/ui/Globe";
 import Navbar from "./Navbar";
 
-// ---------------------------------------------------------------------------
-// Reel / video card settings (reel card is commented out below)
-// To bring the card back: un-comment these two lines AND the reel block.
-// Later: put your video in /public/videos/reel.mp4 and set
-//   VIDEO_SRC = "/videos/reel.mp4"
-// Optional thumbnail: VIDEO_POSTER = "/videos/reel-poster.jpg"
-// While VIDEO_SRC is empty, a fake black thumbnail with a play button shows.
-// ---------------------------------------------------------------------------
+
 // const VIDEO_SRC = "";
 // const VIDEO_POSTER = "";
 
