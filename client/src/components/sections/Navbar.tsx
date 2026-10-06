@@ -128,8 +128,8 @@ const poppins = Poppins({
 
 const NAV_LINKS = [
     { label: "Home", href: "/" },
-    { label: "Events", href: "/events" },
     { label: "About Us", href: "/about" },
+    { label: "Events", href: "/events" },
     { label: "Members", href: "/members" },
     { label: "Gallery", href: "/gallery" },
 ];

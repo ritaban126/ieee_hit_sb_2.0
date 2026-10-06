@@ -1,245 +1,18 @@
-
-// "use client";
-
-// import React from "react";
-// import SectionWrapper from "@/components/ui/SectionWrapper";
-// import { Globe } from "@/components/ui/Globe";
-// // import Link from "next/link";
-// import Navbar from "./Navbar";
-
-// // ---------------------------------------------------------------------------
-// // Reel / video card settings
-// // Later: put your video in /public/videos/reel.mp4 and set
-// //   VIDEO_SRC = "/videos/reel.mp4"
-// // Optional thumbnail: VIDEO_POSTER = "/videos/reel-poster.jpg"
-// // While VIDEO_SRC is empty, a fake black thumbnail with a play button shows.
-// // ---------------------------------------------------------------------------
-// const VIDEO_SRC = "";
-// const VIDEO_POSTER = "";
-
-// const Hero = () => {
-//     // const [mobileOpen, setMobileOpen] = React.useState(false);
-
-//     const marqueeTexts = [
-//         "INNOVATING - EDUCATING - EMPOWERING",
-//         "INNOVATING - EDUCATING - EMPOWERING",
-//         "INNOVATING - EDUCATING - EMPOWERING",
-//         "INNOVATING - EDUCATING - EMPOWERING",
-//     ];
-
-//     return (
-//         <>
-//             <style>
-//                 {`
-//                     @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-//                     *{
-//                         font-family: "Poppins", sans-serif;
-//                     }
-//                     .marquee-inner {
-//                         animation: marqueeScroll 30s linear infinite;
-//                     }
-//                     @keyframes marqueeScroll {
-//                         0% { transform: translateX(0%); }
-//                         100% { transform: translateX(-50%); }
-//                     }
-//                 `}
-//             </style>
-//             <header className='flex flex-col items-center bg-black text-white relative overflow-hidden w-full'>
-
-//                 {/* <nav className="flex flex-col items-center w-full border-b border-zinc-800 z-30 bg-black">
-//                     <SectionWrapper className="flex items-center justify-between p-4 md:py-4">
-//                         <Link href="/" className="flex items-center gap-2 text-white font-bold text-lg md:text-xl tracking-wider">
-//                             IEEE HIT SB
-//                         </Link>
-//                         <div id="menu" className={`${mobileOpen ? 'max-md:w-full' : 'max-md:w-0'} max-md:absolute max-md:top-0 max-md:z-10 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-full max-md:bg-black/50 max-md:backdrop-blur max-md:flex-col max-md:justify-center flex items-center gap-8 text-sm`}>
-//                             <a href="#" onClick={() => setMobileOpen(false)} className="hover:text-white/80">Home</a>
-//                             <Link href="/events" onClick={() => setMobileOpen(false)} className="hover:text-white/80">Events</Link>
-//                             <Link href="/about" onClick={() => setMobileOpen(false)} className="hover:text-white/80">About</Link>
-//                             {/* <a href="#" onClick={() => setMobileOpen(false)} className="hover:text-white/80">Pricing</a> */}
-//                             {/* <Link href="/members" onClick={() => setMobileOpen(false)} className="hover:text-white/80">Members</Link>
-//                             <Link href="/gallery" onClick={() => setMobileOpen(false)} className="hover:text-white/80">Gallery</Link> */} 
-
-//                             {/* <button id="close-menu" onClick={() => setMobileOpen(false)} className="md:hidden bg-gray-900 hover:bg-gray-800 text-white p-2 rounded-md aspect-square font-medium transition">
-//                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-//                                     <path d="M18 6 6 18" /><path d="m6 6 12 12" />
-//                                 </svg>
-//                             </button>
-//                         </div> */}
-//                         {/* <button className="hidden md:flex items-center gap-1.5 bg-linear-to-b from-[#1E1E1E] to-[#050505] border border-[#242424] px-4 py-2.5 rounded-lg text-sm transition cursor-pointer hover:border-zinc-700">
-//                             Sign in
-//                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m5.833 14.168 8.334-8.333m0 8.333V5.835H5.833" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-//                         </button> */}
-//                         {/* <Link
-//     href="/login"
-//     className="hidden md:flex items-center gap-1.5 bg-linear-to-b from-[#1E1E1E] to-[#050505] border border-[#242424] px-4 py-2.5 rounded-lg text-sm transition cursor-pointer hover:border-zinc-700"
-// >
-//     Sign in
-
-//     <svg
-//         width="20"
-//         height="20"
-//         viewBox="0 0 20 20"
-//         fill="none"
-//         xmlns="http://www.w3.org/2000/svg"
-//     >
-//         <path
-//             d="m5.833 14.168 8.334-8.333m0 8.333V5.835H5.833"
-//             stroke="#fff"
-//             strokeWidth="2"
-//             strokeLinecap="round"
-//             strokeLinejoin="round"
-//         />
-//     </svg>
-// </Link> */}
-
-
-//                         {/* <button id="open-menu" onClick={() => setMobileOpen(true)} className="md:hidden bg-gray-900 hover:bg-gray-800 text-gray-50 p-2 rounded-md aspect-square font-medium transition">
-//                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-//                                 <path d="M4 12h16" /><path d="M4 18h16" /><path d="M4 6h16" />
-//                             </svg>
-//                         </button> */}
-//                     {/* </SectionWrapper>
-//                 </nav> */}
-//                 <Navbar/>
-
-//                 {/* Vertical margin guide lines */}
-//                 <div className="absolute top-18 left-0 right-0 bottom-0 pointer-events-none flex justify-between px-4 md:px-16 lg:px-24 xl:px-32 z-20">
-//                     <div className="w-px h-full bg-zinc-800/80"></div>
-//                     <div className="w-px h-full bg-zinc-800/80"></div>
-//                 </div>
-
-//                 {/* ===== GLOBE — pushed a bit further down ===== */}
-//                 <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-//                     <div className="w-full h-full flex items-start justify-end translate-x-[15%] sm:translate-x-[10%] md:translate-x-[5%] translate-y-[16%] sm:translate-y-[18%] md:translate-y-[20%]">
-//                         <Globe />
-//                     </div>
-//                 </div>
-
-//                 {/* ===== TWO SEPARATE TEXT DIVS: heading top-left, paragraph+buttons bottom-left ===== */}
-//                 <div className="relative z-10 w-full flex flex-col justify-between min-h-[70vh] sm:min-h-[75vh] py-6 sm:py-8">
-
-//                     {/* DIV 1 — heading top-left  +  reel/video card top-right (parallel to heading) */}
-//                     <div className="top-section w-full pt-2 sm:pt-4">
-//                         <SectionWrapper className="w-full">
-//                             <div className="flex items-start justify-between gap-6 pl-10 sm:pl-14 md:pl-16 pr-4 sm:pr-14 md:pr-16">
-
-//                                 {/* Heading (unchanged) */}
-//                                 <div className="flex flex-col items-start max-w-5xl">
-//                                     <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.15] m-0">
-//                                         A new generation
-//                                     </div>
-//                                     <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.15] m-0 mt-2">
-//                                         of engineers.
-//                                     </div>
-//                                 </div>
-
-//                                 {/* Reel / video card — top-right corner (hidden on very small screens) */}
-//                                 <div className="reel-card hidden sm:block shrink-0 w-44 md:w-56 lg:w-64 pointer-events-auto">
-//                                     <div className="relative aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-black shadow-[0_0_40px_rgba(255,255,255,0.04)]">
-//                                         {VIDEO_SRC ? (
-//                                             <video
-//                                                 className="absolute inset-0 h-full w-full object-cover"
-//                                                 src={VIDEO_SRC}
-//                                                 poster={VIDEO_POSTER || undefined}
-//                                                 autoPlay
-//                                                 muted
-//                                                 loop
-//                                                 playsInline
-//                                                 preload="metadata"
-//                                             />
-//                                         ) : (
-//                                             <>
-//                                                 {/* fake thumbnail */}
-//                                                 <div className="absolute inset-0 bg-linear-to-br from-zinc-900 via-black to-zinc-950" />
-
-//                                                 {/* play button */}
-//                                                 <div className="absolute inset-0 flex items-center justify-center">
-//                                                     <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm">
-//                                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">
-//                                                             <path d="M8 5v14l11-7z" />
-//                                                         </svg>
-//                                                     </div>
-//                                                 </div>
-
-//                                                 {/* small label + duration */}
-//                                                 <span className="absolute bottom-2 left-3 text-[10px] md:text-xs text-zinc-400">
-//                                                     Watch reel
-//                                                 </span>
-//                                                 <span className="absolute bottom-2 right-3 text-[10px] md:text-xs text-zinc-500">
-//                                                     0:30
-//                                                 </span>
-//                                             </>
-//                                         )}
-//                                     </div>
-//                                 </div>
-
-//                             </div>
-//                         </SectionWrapper>
-//                     </div>
-
-//                     {/* DIV 2 — paragraph + buttons pinned bottom-left, with clear gap from the vertical guide line */}
-//                     <div className="bottom-section w-full pb-4 sm:pb-6">
-//                         <SectionWrapper className="w-full">
-//                             <div className="flex flex-col items-start max-w-5xl pl-10 sm:pl-14 md:pl-16 pr-4">
-//                                 <div className="text-xs sm:text-sm text-zinc-300 max-w-85 m-0 mb-6 leading-relaxed">
-//                                    Where technology meets creativity.
-//                                    Learn, innovate, and build solutions that shape the future.
-//                                 </div>
-//                                 <div className="flex items-center gap-3">
-//                                     <button className="bg-white text-black hover:bg-zinc-200 text-xs md:text-sm font-medium px-5 py-2.5 rounded-lg transition cursor-pointer">
-//                                         Explore Events
-//                                     </button>
-//                                     <button className="bg-[#1c1e22] text-white hover:bg-[#282b30] text-xs md:text-sm font-medium px-5 py-2.5 rounded-lg transition cursor-pointer">
-//                                         Meet the Team
-//                                     </button>
-//                                 </div>
-//                             </div>
-//                         </SectionWrapper>
-//                     </div>
-//                 </div>
-
-//                 {/* ===== DIVIDER LINE ===== */}
-//                 <SectionWrapper className="z-10">
-//                     <div className="w-full border-t border-zinc-800"></div>
-//                 </SectionWrapper>
-
-//                 {/* ===== SCROLLING TEXT MARQUEE ===== */}
-//                 <SectionWrapper className="relative overflow-hidden z-10">
-//                     <div className="w-full bg-black py-6 overflow-hidden">
-//                         <div className="flex whitespace-nowrap marquee-inner w-max">
-//                             {[...marqueeTexts, ...marqueeTexts].map((text, i) => (
-//                                 <div key={i} className="flex items-center mx-8 text-white font-extrabold text-lg md:text-xl tracking-wider">
-//                                     {text}
-//                                 </div>
-//                             ))}
-//                         </div>
-//                     </div>
-//                 </SectionWrapper>
-
-//                 {/* ===== BOTTOM BORDER ===== */}
-//                 <div className="w-full border-b border-zinc-800 z-10"></div>
-
-//             </header>
-//         </>
-//     )
-// }
-
-// export default Hero;
-
-
-
-
-
-
-
-
 "use client";
 
 import React from "react";
+import dynamic from "next/dynamic";
 import SectionWrapper from "@/components/ui/SectionWrapper";
-import { Globe } from "@/components/ui/Globe";
 import Navbar from "./Navbar";
 
+// Lazy-load Globe so it doesn't block the initial Hero render
+const Globe = dynamic(
+    () => import("@/components/ui/Globe").then((mod) => mod.Globe),
+    {
+        ssr: false,
+        loading: () => null,
+    }
+);
 
 // const VIDEO_SRC = "";
 // const VIDEO_POSTER = "";
@@ -269,9 +42,10 @@ const Hero = () => {
                     }
                 `}
             </style>
+
             <header className='flex flex-col items-center bg-black text-white relative overflow-hidden w-full'>
 
-                <Navbar/>
+                <Navbar />
 
                 {/* Vertical margin guide lines */}
                 <div className="absolute top-18 left-0 right-0 bottom-0 pointer-events-none flex justify-between px-4 md:px-16 lg:px-24 xl:px-32 z-20">
@@ -289,12 +63,12 @@ const Hero = () => {
                 {/* ===== TWO SEPARATE TEXT DIVS: heading top-left, paragraph+buttons bottom-left ===== */}
                 <div className="relative z-10 w-full flex flex-col justify-between min-h-[70vh] sm:min-h-[75vh] py-6 sm:py-8">
 
-                    {/* DIV 1 — heading top-left (reel/video card is commented out) */}
+                    {/* DIV 1 — heading top-left */}
                     <div className="top-section w-full pt-2 sm:pt-4">
                         <SectionWrapper className="w-full">
                             <div className="flex items-start justify-between gap-6 pl-10 sm:pl-14 md:pl-16 pr-4 sm:pr-14 md:pr-16">
 
-                                {/* Heading (unchanged) */}
+                                {/* Heading */}
                                 <div className="flex flex-col items-start max-w-5xl">
                                     <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.15] m-0">
                                         A new generation
@@ -304,10 +78,7 @@ const Hero = () => {
                                     </div>
                                 </div>
 
-                                {/* ===== REEL / VIDEO CARD — COMMENTED OUT (top-right corner) =====
-                                    Un-comment this whole block (and VIDEO_SRC / VIDEO_POSTER at the top) to bring it back.
-                                    The small notes inside are plain text on purpose, so they do not break this comment.
-
+                                {/* ===== REEL / VIDEO CARD — COMMENTED OUT =====
                                 <div className="reel-card hidden sm:block shrink-0 w-44 md:w-56 lg:w-64 pointer-events-auto">
                                     <div className="relative aspect-video overflow-hidden rounded-2xl border border-zinc-800 bg-black shadow-[0_0_40px_rgba(255,255,255,0.04)]">
                                         {VIDEO_SRC ? (
@@ -323,10 +94,8 @@ const Hero = () => {
                                             />
                                         ) : (
                                             <>
-                                                (fake thumbnail)
                                                 <div className="absolute inset-0 bg-linear-to-br from-zinc-900 via-black to-zinc-950" />
 
-                                                (play button)
                                                 <div className="absolute inset-0 flex items-center justify-center">
                                                     <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm">
                                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">
@@ -335,7 +104,6 @@ const Hero = () => {
                                                     </div>
                                                 </div>
 
-                                                (small label + duration)
                                                 <span className="absolute bottom-2 left-3 text-[10px] md:text-xs text-zinc-400">
                                                     Watch reel
                                                 </span>
@@ -346,25 +114,26 @@ const Hero = () => {
                                         )}
                                     </div>
                                 </div>
-
                                 ===== END REEL / VIDEO CARD ===== */}
 
                             </div>
                         </SectionWrapper>
                     </div>
 
-                    {/* DIV 2 — paragraph + buttons pinned bottom-left, with clear gap from the vertical guide line */}
+                    {/* DIV 2 — paragraph + buttons pinned bottom-left */}
                     <div className="bottom-section w-full pb-4 sm:pb-6">
                         <SectionWrapper className="w-full">
                             <div className="flex flex-col items-start max-w-5xl pl-10 sm:pl-14 md:pl-16 pr-4">
                                 <div className="text-xs sm:text-sm text-zinc-300 max-w-85 m-0 mb-6 leading-relaxed">
-                                   Where technology meets creativity.
-                                   Learn, innovate, and build solutions that shape the future.
+                                    Where technology meets creativity.
+                                    Learn, innovate, and build solutions that shape the future.
                                 </div>
+
                                 <div className="flex items-center gap-3">
                                     <button className="bg-white text-black hover:bg-zinc-200 text-xs md:text-sm font-medium px-5 py-2.5 rounded-lg transition cursor-pointer">
                                         Explore Events
                                     </button>
+
                                     <button className="bg-[#1c1e22] text-white hover:bg-[#282b30] text-xs md:text-sm font-medium px-5 py-2.5 rounded-lg transition cursor-pointer">
                                         Meet the Team
                                     </button>
@@ -384,7 +153,10 @@ const Hero = () => {
                     <div className="w-full bg-black py-6 overflow-hidden">
                         <div className="flex whitespace-nowrap marquee-inner w-max">
                             {[...marqueeTexts, ...marqueeTexts].map((text, i) => (
-                                <div key={i} className="flex items-center mx-8 text-white font-extrabold text-lg md:text-xl tracking-wider">
+                                <div
+                                    key={i}
+                                    className="flex items-center mx-8 text-white font-extrabold text-lg md:text-xl tracking-wider"
+                                >
                                     {text}
                                 </div>
                             ))}
@@ -397,8 +169,8 @@ const Hero = () => {
 
             </header>
         </>
-    )
-}
+    );
+};
 
 export default Hero;
 

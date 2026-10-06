@@ -10,12 +10,10 @@ const page = () => {
   return (
       <>
       <main className="relative bg-black">
-         {/* <NavbarEvents/> */}
          <Navbar/>
         {/* vertical lines div */}
         <div className="relative z-10">
            <Events/>
-          {/* baaki sections */}
         </div>
         <Footer/>
       </main>

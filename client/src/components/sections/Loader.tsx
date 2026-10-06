@@ -11,7 +11,7 @@ export default function Loader({ onLoadingComplete }: { onLoadingComplete?: () =
     const timer = setTimeout(() => {
       setIsLoading(false);
       if (onLoadingComplete) onLoadingComplete();
-    }, 2200); // Adjust duration as needed
+    }, 1000); // Adjust duration as needed
 
     return () => clearTimeout(timer);
   }, [onLoadingComplete]);
